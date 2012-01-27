@@ -1,15 +1,16 @@
-import argparse, sys, httplib
+import argparse, sys, urllib2
 
 
 def main():
   parser = argparse.ArgumentParser(description='Sitevalidator alkalmazas, weboldalak teljes validalasahoz.')
   parser.print_help()
-  churl = "http://people.inf.elte.hu/vzoli"
-  conn = httplib.HTTPConnection("validator.w3.org")
-  conn.request("GET", "/check?uri="+churl+"&output=soap12")
-  resp = conn.getresponse()
-
-  print resp.getheaders()
+  
+  churl = "http://people.inf.elte.hu/vzoli" #web URL
+  req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
+  r = urllib2.urlopen(req)
+  headers = r.info() # -> headers['X-W3C-Validator-*']
+  data = r.read()
+  
 
 
 if __name__ == "__main__":
