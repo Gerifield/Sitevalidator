@@ -1,4 +1,5 @@
 import argparse, sys, urllib2
+from BeautifulSoup import BeautifulSoup
 
 
 def main():
