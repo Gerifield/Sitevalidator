@@ -28,13 +28,25 @@ def main():
   #print 'ERRORS: ', soup.first('m:errorcount').string
   #print 'WARNINGS: ', soup.first('m:warningcount').string
   validator = W3cSoapApi.W3cSoapApi(churl)
-  validator.parse()
+  #validator.parse()
+  #validator.parseCSS()
+  validator.parseAll()
   print validator.getHeaders()
   print "------------------"
   print "Doctype: ", validator.getDoctype()
   print "Errors: ", validator.getErrorNum()
   print "Warnings: ", validator.getWarningNum()
   print "Valid? ", validator.isValid()
+  print ""
+  print "------------------------"
+  print ""
+  
+  print validator.getCSSHeaders()
+  print "------------------"
+  print "Doctype: ", validator.getCSSDoctype()
+  print "Errors: ", validator.getCSSErrorNum()
+  print "Warnings: ", validator.getCSSWarningNum()
+  print "Valid? ", validator.isValidCSS()
   
 
 if __name__ == "__main__":
