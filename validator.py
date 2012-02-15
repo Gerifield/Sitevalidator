@@ -7,7 +7,8 @@ import W3cSoapApi
 
 def main():
   parser = argparse.ArgumentParser(description='Sitevalidator alkalmazas, weboldalak teljes validalasahoz.')
-  parser.add_argument('--xml', metavar='', help='Google sitemap használatához kapcsoló')
+  parser.add_argument('--xml', metavar='', help='Google sitemap használatához kapcsoló.')
+  parser.add_argument('--format', choices=['short', 'long'], default='long', help='A kimenet formázása.')
   parser.add_argument('url', metavar='URL', help='Validalni kivant oldal URL cime')
   parser.print_help()
   
