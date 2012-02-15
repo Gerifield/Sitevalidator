@@ -8,7 +8,7 @@ def main():
   parser = argparse.ArgumentParser(description='Sitevalidator alkalmazas, weboldalak teljes validalasahoz.')
   parser.print_help()
   
-  churl = "http://people.inf.elte.hu/vzoli" #web URL
+  #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
   #r = urllib2.urlopen(req)
   #headers = r.info() # -> headers['X-W3C-Validator-*']
@@ -27,26 +27,28 @@ def main():
   #print 'VALID: ',soup.first('m:validity').string #validity
   #print 'ERRORS: ', soup.first('m:errorcount').string
   #print 'WARNINGS: ', soup.first('m:warningcount').string
-  validator = W3cSoapApi.W3cSoapApi(churl)
+  
+  #validator = W3cSoapApi.W3cSoapApi(churl)
   #validator.parse()
   #validator.parseCSS()
-  validator.parseAll()
-  print validator.getHeaders()
-  print "------------------"
-  print "Doctype: ", validator.getDoctype()
-  print "Errors: ", validator.getErrorNum()
-  print "Warnings: ", validator.getWarningNum()
-  print "Valid? ", validator.isValid()
-  print ""
-  print "------------------------"
-  print ""
   
-  print validator.getCSSHeaders()
-  print "------------------"
-  print "Doctype: ", validator.getCSSDoctype()
-  print "Errors: ", validator.getCSSErrorNum()
-  print "Warnings: ", validator.getCSSWarningNum()
-  print "Valid? ", validator.isValidCSS()
+  #validator.parseAll()
+  #print validator.getHeaders()
+  #print "------------------"
+  #print "Doctype: ", validator.getDoctype()
+  #print "Errors: ", validator.getErrorNum()
+  #print "Warnings: ", validator.getWarningNum()
+  #print "Valid? ", validator.isValid()
+  #print ""
+  #print "------------------------"
+  #print ""
+  
+  #print validator.getCSSHeaders()
+  #print "------------------"
+  #print "Doctype: ", validator.getCSSDoctype()
+  #print "Errors: ", validator.getCSSErrorNum()
+  #print "Warnings: ", validator.getCSSWarningNum()
+  #print "Valid? ", validator.isValidCSS()
   
 
 if __name__ == "__main__":
