@@ -1,3 +1,5 @@
+# -*- coding: lutf-8 -*-
+
 import argparse
 import sys
 import W3cSoapApi
@@ -6,6 +8,8 @@ import W3cSoapApi
 
 def main():
   parser = argparse.ArgumentParser(description='Sitevalidator alkalmazas, weboldalak teljes validalasahoz.')
+  parser.add_argument('--xml', metavar='--xml', help='Google sitemap használatához kapcsoló')
+  parser.add_argument('url', metavar='URL', help='Validalni kivant oldal URL cime')
   parser.print_help()
   
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
