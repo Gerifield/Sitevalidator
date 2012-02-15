@@ -7,10 +7,12 @@ import W3cSoapApi
 
 def main():
   parser = argparse.ArgumentParser(description='Sitevalidator alkalmazas, weboldalak teljes validalasahoz.')
-  parser.add_argument('--xml', metavar='', help='Google sitemap használatához kapcsoló.')
+  parser.add_argument('--xml', action='store_true', help='Google sitemap használatához kapcsoló.')
   parser.add_argument('--format', choices=['short', 'long'], default='long', help='A kimenet formázása.')
   parser.add_argument('url', metavar='URL', help='Validalni kivant oldal URL cime')
-  parser.print_help()
+  #parser.print_help()
+  args = parser.parse_args()
+  print args
   
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
