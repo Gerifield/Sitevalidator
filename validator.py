@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 import argparse
 import sys
-import W3cSoapApi
+
 from urlparse import urlparse
+
+import PageParser
+import W3cSoapApi
 
 
 def urlCheck(str):
@@ -22,6 +25,11 @@ def main():
   args = parser.parse_args()
   print args
   print args.url
+  
+  pp = PageParser.PageParser(args.url)
+  pp.parsePage()
+  
+  
   
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
