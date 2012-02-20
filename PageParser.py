@@ -1,4 +1,5 @@
 import urllib2
+import re
 from BeautifulSoup import BeautifulSoup
 from urlparse import urlparse
 
@@ -10,13 +11,14 @@ class PageParser:
   def __init__(self, url):
     self.addUlr(url)
     url = urlparse(url)
-    self.baseurl = url.netloc #kiszedjuk az url cimet
+    self.baseurl = url.scheme + "://" + url.netloc #kiszedjuk az url cimet
+    #print self.baseurl
   
   def addUlr(self, url):
     if self.finurl.count(url) == 0: #ha eddig nem dolgoztuk mar fel
       self.urllist.append(url)
 
-  def isUrl(self):
+  def hasUrl(self):
     return len(self.urllist) > 0
   def nextUrl(self):
     ret = self.urllist.pop()
@@ -24,17 +26,19 @@ class PageParser:
     return ret
   def isLocal(self, url):
     url = urlparse(url)
-    if self.baseurl == url.netloc:
+    if self.baseurl == url.scheme + "://" + url.netloc:
       return True
     else:
       return False
-  def parsePage(self):
-    if self.isUrl():
+  def parsePage(self): # minden aloldalon vegigmegy
+    while self.hasUrl():
       u = self.nextUrl()
       html = urllib2.urlopen(u).read()
       soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
       
-      print soup.findAll('a')
+      tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl)}) #csak a lokalis url-eket szedjuk ki
+      for tag in tags:
+        print tag['href'] #URL feldolgozas
       
     else:
-      return False
+      return True
