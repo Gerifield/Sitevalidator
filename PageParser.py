@@ -19,9 +19,10 @@ class PageParser:
   def isUrl(self):
     return len(self.urllist) > 0
   def nextUrl(self):
-    ret = self.urllist.pop()
-    self.finurl.append(ret) #hozzaadjuk a feldolgozotthoz
-    return ret
+    #ret = self.urllist.pop()
+    #self.finurl.append(ret) #hozzaadjuk a feldolgozotthoz
+    #return ret
+    return self.urllist.pop()
   def isLocal(self, url):
     url = urlparse(url)
     if self.baseurl == url.netloc:
@@ -31,6 +32,7 @@ class PageParser:
   def parsePage(self):
     if self.isUrl():
       u = self.nextUrl()
+      #TODO: URL hozzaadasa a keszekhez! -> kulon osztaly a validalasok tarolosara? (map)
       html = urllib2.urlopen(u).read()
       soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
       
