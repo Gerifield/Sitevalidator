@@ -45,14 +45,17 @@ class PageParser:
   def parsePage(self): # minden aloldalon vegigmegy
     while self.hasUrl():
       u = self.nextUrl()
-      html = urllib2.urlopen(u).read()
-      soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
-      
-      tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl)}) #csak a lokalis url-eket szedjuk ki
-      for tag in tags:
-        #print tag['href'] #URL feldolgozas
-        if self.checkEnding(tag['href']):
-          print "Good: "+tag['href']
-          self.addUrl(tag['href'])
+      try:
+        html = urllib2.urlopen(u).read()
+        soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
+        
+        tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl)}) #csak a lokalis url-eket szedjuk ki
+        for tag in tags:
+          #print tag['href'] #URL feldolgozas
+          if self.checkEnding(tag['href']):
+            print "Good: "+tag['href']
+            self.addUrl(tag['href'])
+      except:
+        print "Error: "+u # 404 lekezelese
     else:
       return True
