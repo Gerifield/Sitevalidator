@@ -10,7 +10,7 @@ import W3cSoapApi
 
 def urlCheck(str):
   check = urlparse(str)
-  print check
+  #print check
   if check.netloc == '' or check.scheme == '':
     raise argparse.ArgumentTypeError('Rossz URL formátum! (A sémát is meg kell adni! http, https...)')
   return check.geturl()
@@ -23,8 +23,8 @@ def main():
   parser.add_argument('url', metavar='URL', type=urlCheck, help='Validalni kivant oldal URL cime')
   #parser.print_help()
   args = parser.parse_args()
-  print args
-  print args.url
+  #print args
+  #print args.url
   
   pp = PageParser.PageParser(args.url)
   pp.parsePage()
