@@ -7,8 +7,10 @@ class W3cSoapApi:
   def __init__(self, url=""):
     self.url = url
 
-  def setUrl(self):
+  def setUrl(self, url):
     self.url = url
+  def getUrl(self):
+    return self.url
 
   def addHeader(self, header, value):
     self.headers[header] = value

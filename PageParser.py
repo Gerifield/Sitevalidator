@@ -21,8 +21,6 @@ class PageParser:
     if self.finurl.count(url) == 0: #ha eddig nem dolgoztuk mar fel
       self.urllist.append(url)
       self.aloldal += 1
-    else:
-      print "Mar volt: "+url
 
   def hasUrl(self):
     return len(self.urllist) > 0
@@ -46,23 +44,35 @@ class PageParser:
         return True
     return False
 
+  def getEndings(self):
+    return self.allowedEnds
+  
+  def addEnding(self, end):
+    self.allowedEnds.append(end) #.valami formaban
+  
+  def getLinks(self):
+    return self.finurl
+  
   def parsePage(self): # minden aloldalon vegigmegy
     while self.hasUrl():
       u = self.nextUrl()
-      try:
-        html = urllib2.urlopen(u).read()
-        soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
+      #try:
+      html = urllib2.urlopen(u).read()
+      soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
+      print html
         
-        tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl)}) #csak a lokalis url-eket szedjuk ki
-        for tag in tags:
-          #print tag['href'] #URL feldolgozas
+      tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
+      #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet
+      for tag in tags:
+        if tag.has_key('href'):
+          print tag #URL feldolgozas
           if self.checkEnding(tag['href']):
             print "Good: "+tag['href']
-            self.addUrl(tag['href'])
-      except:
-        print "Error: "+u # 404 lekezelese
-    else:
+            #self.addUrl(tag['href'])
+    #  except:
+    #    print "Error: "+u # 404 lekezelese
+    #else:
       #print "URL lista: ", self.urllist
-      print "URL lista: ", self.aloldal
-      print "Volt: ", len(self.finurl)
-      return True
+      #print "URL lista: ", self.aloldal
+      #print "Volt: ", len(self.finurl)
+    #  return True

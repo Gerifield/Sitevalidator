@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import argparse
 import sys
+import time
 
 from urlparse import urlparse
 
 import PageParser
 import W3cSoapApi
+
 
 
 def urlCheck(str):
@@ -28,8 +30,27 @@ def main():
   
   pp = PageParser.PageParser(args.url)
   pp.parsePage()
+  print "Talat linkek: "+str(len(pp.getLinks()))
+  #print pp.getLinks()
   
-  
+  """val = W3cSoapApi.W3cSoapApi()
+  for i in range(0,5):
+    val.setUrl(pp.getLinks()[i])
+    val.parseAll()
+    print "Page: ", val.getUrl()
+    print "HTML: ", val.getDoctype()
+    if not val.isValid():
+      print "Error: ", val.getErrorNum()
+      print "Warning: ", val.getErrorNum()
+    else:
+      print "Valid, doc: ", val.getDoctype()
+    print "CSS: ", val.getCSSDoctype()
+    if not val.isValid():
+      print "Error: ", val.getCSSErrorNum()
+      print "Warning: ", val.getCSSErrorNum()
+    else:
+      print "Valid, doc: ", val.getCSSDoctype()
+    time.sleep(1) #legalabb 1 sec kell"""
   
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
