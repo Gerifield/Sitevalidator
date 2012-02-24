@@ -67,6 +67,8 @@ class PageParser:
         soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
         #print html
         
+        
+        #TODO: "Inline" CSS es Javascript kodokat lekezelni!
         tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
         #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet
         for tag in tags:
