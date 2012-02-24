@@ -34,7 +34,7 @@ def main():
   print pp.getLinks()
   
   val = W3cSoapApi.W3cSoapApi()
-  for i in range(0,5):
+  for i in range(len(pp.getLinks())):
     val.setUrl(pp.getLinks()[i])
     val.parseAll()
     print "Page: ", val.getUrl()
