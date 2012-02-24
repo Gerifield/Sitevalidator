@@ -20,7 +20,7 @@ class PageParser:
     print self.baseurl
   
   def addUrl(self, url):
-    if not url.rjust(4) == "http":
+    if not url.startswith("http"):
       url = urlparse.urljoin(self.firsturl, url)
       print "Mod: "+url
     if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
