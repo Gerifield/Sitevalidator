@@ -8,6 +8,7 @@ class PageParser:
   finurl = []
   baseurl = ""
   allowedEnds = ["/", ".php", ".htm", ".html", ".asp"]
+  aloldal = 0
   
   
   def __init__(self, url):
@@ -19,6 +20,9 @@ class PageParser:
   def addUrl(self, url):
     if self.finurl.count(url) == 0: #ha eddig nem dolgoztuk mar fel
       self.urllist.append(url)
+      self.aloldal += 1
+    else:
+      print "Mar volt: "+url
 
   def hasUrl(self):
     return len(self.urllist) > 0
@@ -58,4 +62,7 @@ class PageParser:
       except:
         print "Error: "+u # 404 lekezelese
     else:
+      #print "URL lista: ", self.urllist
+      print "URL lista: ", self.aloldal
+      print "Volt: ", len(self.finurl)
       return True
