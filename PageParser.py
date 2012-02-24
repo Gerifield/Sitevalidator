@@ -1,26 +1,32 @@
 import urllib2
 import re
 from BeautifulSoup import BeautifulSoup
-from urlparse import urlparse
+import urlparse
 
 class PageParser:
   urllist = []
   finurl = []
   baseurl = ""
+  firsturl = ""
   allowedEnds = ["/", ".php", ".htm", ".html", ".asp"]
   aloldal = 0
   
   
   def __init__(self, url):
+    self.firsturl = url
     self.addUrl(url)
-    url = urlparse(url)
+    url = urlparse.urlparse(url)
     self.baseurl = url.scheme + "://" + url.netloc #kiszedjuk az url cimet
-    #print self.baseurl
+    print self.baseurl
   
   def addUrl(self, url):
-    if self.finurl.count(url) == 0: #ha eddig nem dolgoztuk mar fel
+    if not url.rjust(4) == "http":
+      url = urlparse.urljoin(self.firsturl, url)
+      print "Mod: "+url
+    if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
       self.urllist.append(url)
       self.aloldal += 1
+      print "Added! Num: ", self.aloldal
 
   def hasUrl(self):
     return len(self.urllist) > 0
@@ -31,7 +37,7 @@ class PageParser:
     return ret
     
   def isLocal(self, url):
-    url = urlparse(url)
+    url = urlparse.urlparse(url)
     if self.baseurl == url.scheme + "://" + url.netloc:
       return True
     else:
@@ -59,16 +65,16 @@ class PageParser:
       #try:
       html = urllib2.urlopen(u).read()
       soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
-      print html
+      #print html
         
       tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
       #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet
       for tag in tags:
         if tag.has_key('href'):
-          print tag #URL feldolgozas
+          #print tag #URL feldolgozas
           if self.checkEnding(tag['href']):
             print "Good: "+tag['href']
-            #self.addUrl(tag['href'])
+            self.addUrl(tag['href'])
     #  except:
     #    print "Error: "+u # 404 lekezelese
     #else:
