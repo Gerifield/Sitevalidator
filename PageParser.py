@@ -8,25 +8,26 @@ class PageParser:
   finurl = []
   baseurl = ""
   firsturl = ""
-  allowedEnds = ["/", ".php", ".htm", ".html", ".asp"]
+  allowedEnds = ["/", ".php", ".htm", ".html", ".asp"] #Gond, ha nincs semmilyen vegzodes!
   aloldal = 0
   
+  #TODO!!!!!!!!!!!! -> A linkek vegen legalbb egy / kell legyen!!!
   
   def __init__(self, url):
     self.firsturl = url
     self.addUrl(url)
     url = urlparse.urlparse(url)
     self.baseurl = url.scheme + "://" + url.netloc #kiszedjuk az url cimet
-    print self.baseurl
+    #print self.baseurl
   
   def addUrl(self, url):
     if not url.startswith("http"):
-      url = urlparse.urljoin(self.firsturl, url)
-      #print "Mod: "+url
+      url = urlparse.urljoin(self.firsturl, url) #Extrem esetben hibas lehet!
+      print "Mod: "+url
     if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
       self.urllist.append(url)
       self.aloldal += 1
-      #print "Added! Num: ", self.aloldal
+      print "Added! Num: ", self.aloldal
 
   def hasUrl(self):
     return len(self.urllist) > 0
