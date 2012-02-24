@@ -22,11 +22,11 @@ class PageParser:
   def addUrl(self, url):
     if not url.startswith("http"):
       url = urlparse.urljoin(self.firsturl, url)
-      print "Mod: "+url
+      #print "Mod: "+url
     if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
       self.urllist.append(url)
       self.aloldal += 1
-      print "Added! Num: ", self.aloldal
+      #print "Added! Num: ", self.aloldal
 
   def hasUrl(self):
     return len(self.urllist) > 0
@@ -62,23 +62,23 @@ class PageParser:
   def parsePage(self): # minden aloldalon vegigmegy
     while self.hasUrl():
       u = self.nextUrl()
-      #try:
-      html = urllib2.urlopen(u).read()
-      soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
-      #print html
+      try:
+        html = urllib2.urlopen(u).read()
+        soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
+        #print html
         
-      tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
-      #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet
-      for tag in tags:
-        if tag.has_key('href'):
-          #print tag #URL feldolgozas
-          if self.checkEnding(tag['href']):
-            print "Good: "+tag['href']
-            self.addUrl(tag['href'])
-    #  except:
-    #    print "Error: "+u # 404 lekezelese
-    #else:
+        tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
+        #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet
+        for tag in tags:
+          if tag.has_key('href'):
+            #print tag #URL feldolgozas
+            if self.checkEnding(tag['href']):
+              #print "Good: "+tag['href']
+              self.addUrl(tag['href'])
+      except:
+        print "Error at page: "+u # 404 lekezelese
+    else:
       #print "URL lista: ", self.urllist
       #print "URL lista: ", self.aloldal
       #print "Volt: ", len(self.finurl)
-    #  return True
+      return True

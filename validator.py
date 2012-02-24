@@ -31,9 +31,9 @@ def main():
   pp = PageParser.PageParser(args.url)
   pp.parsePage()
   print "Talat linkek: "+str(len(pp.getLinks()))
-  #print pp.getLinks()
+  print pp.getLinks()
   
-  """val = W3cSoapApi.W3cSoapApi()
+  val = W3cSoapApi.W3cSoapApi()
   for i in range(0,5):
     val.setUrl(pp.getLinks()[i])
     val.parseAll()
@@ -50,7 +50,7 @@ def main():
       print "Warning: ", val.getCSSErrorNum()
     else:
       print "Valid, doc: ", val.getCSSDoctype()
-    time.sleep(1) #legalabb 1 sec kell"""
+    time.sleep(1) #legalabb 1 sec kell
   
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
