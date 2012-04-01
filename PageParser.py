@@ -17,7 +17,7 @@ class PageParser:
   #TODO!!!!!!!!!!!! -> A linkek vegen legalbb egy / kell legyen!!!
   
   def __init__(self, url):
-    if url.endswith("/"):
+    if url.endswith("/") or not self.checkEnding(url):
       self.errormsg = "Teljes URL-t kell megadni!"
       self.error = True
     else:
