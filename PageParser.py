@@ -8,7 +8,8 @@ class PageParser:
   finurl = []
   baseurl = ""
   latesturl = ""
-  allowedEnds = ["/", ".php", ".htm", ".html", ".asp"] #Gond, ha nincs semmilyen vegzodes!
+  allowedEnds = [".php", ".htm", ".html", ".asp"] #Gond, ha nincs semmilyen vegzodes!
+  # /-t kivettem, azzal ovatosan!
   aloldal = 0
   error = False
   errormsg = ""
