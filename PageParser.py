@@ -29,25 +29,11 @@ class PageParser:
     if not url.startswith("http"):
       print "MURL: ", url
       url = urlparse.urljoin(self.latesturl, url) #Extrem esetben hibas lehet!
-      #url = self.joinUrl(url)
       print "Mod: "+url
     if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
       self.urllist.append(url)
       self.aloldal += 1
       print "Added! Num: ", self.aloldal, url
-
-  def joinUrl(self, url):
-    print "VOLT: "+self.latesturl
-    newsub = self.latesturl[:self.latesturl.rfind("/")+1] #utolso / utani resz leszedese
-    print "JOIN: "+newsub
-    print "-----------------------------"
-    while url.startswith("../"):
-      newsub = newsub[:self.latesturl.rfind("/",0,len(newsub)-1)+1] #utolso /xyz/ levetele
-      url = url[3:] # ../ levetele
-      print "URL: "+newsub
-      print "Ending: "+url
-    print "-----------------------------"
-    return newsub+url
     
   def hasUrl(self):
     return len(self.urllist) > 0
