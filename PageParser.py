@@ -7,7 +7,7 @@ class PageParser:
   urllist = []
   finurl = []
   baseurl = ""
-  firsturl = ""
+  latesturl = ""
   allowedEnds = ["/", ".php", ".htm", ".html", ".asp"] #Gond, ha nincs semmilyen vegzodes!
   aloldal = 0
   error = False
@@ -20,14 +20,15 @@ class PageParser:
       self.errormsg = "Teljes URL-t kell megadni!"
       self.error = True
     else:
-      self.firsturl = url
+      self.latesturl = url
       self.addUrl(url)
       url = urlparse.urlparse(url)
       self.baseurl = url.scheme + "://" + url.netloc #kiszedjuk az url cimet
   
   def addUrl(self, url):
     if not url.startswith("http"):
-      url = urlparse.urljoin(self.firsturl, url) #Extrem esetben hibas lehet!
+      print "MURL: "+url
+      url = urlparse.urljoin(self.latesturl, url) #Extrem esetben hibas lehet, ../-t nem kezel!
       print "Mod: "+url
     if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
       self.urllist.append(url)
@@ -74,6 +75,8 @@ class PageParser:
       u = self.nextUrl()
       try:
         html = urllib2.urlopen(u).read()
+        print "          U: "+u
+        latesturl = u #eltaroljuk, hogy az almappakra is jo legyen
         soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
         #print html
         
