@@ -27,9 +27,9 @@ class PageParser:
   
   def addUrl(self, url):
     if not url.startswith("http"):
-      #print "MURL: ", urlparse.urlparse(url)
-      #url = urlparse.urljoin(self.latesturl, url) #Extrem esetben hibas lehet!
-      url = self.joinUrl(url)
+      print "MURL: ", url
+      url = urlparse.urljoin(self.latesturl, url) #Extrem esetben hibas lehet!
+      #url = self.joinUrl(url)
       print "Mod: "+url
     if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
       self.urllist.append(url)
@@ -37,7 +37,16 @@ class PageParser:
       print "Added! Num: ", self.aloldal, url
 
   def joinUrl(self, url):
+    print "VOLT: "+self.latesturl
     newsub = self.latesturl[:self.latesturl.rfind("/")+1] #utolso / utani resz leszedese
+    print "JOIN: "+newsub
+    print "-----------------------------"
+    while url.startswith("../"):
+      newsub = newsub[:self.latesturl.rfind("/",0,len(newsub)-1)+1] #utolso /xyz/ levetele
+      url = url[3:] # ../ levetele
+      print "URL: "+newsub
+      print "Ending: "+url
+    print "-----------------------------"
     return newsub+url
     
   def hasUrl(self):
@@ -80,8 +89,8 @@ class PageParser:
       u = self.nextUrl()
       try:
         html = urllib2.urlopen(u).read()
-        print "          U: "+u
-        latesturl = u #eltaroljuk, hogy az almappakra is jo legyen
+        #print "          U: "+u
+        self.latesturl = u #eltaroljuk, hogy az almappakra is jo legyen
         soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
         #print html
         
