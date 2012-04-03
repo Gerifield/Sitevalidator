@@ -9,5 +9,9 @@ class Dbmodel extends CI_Model {
     function checkRegEnabled(){
       return true; //TODO: Lekérés generálás hozzá
     }
+    
+    function checkLogin($user, $pass){
+      
+    }
 
 }

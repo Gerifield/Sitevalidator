@@ -18,10 +18,15 @@ class Main extends CI_Controller {
   public function login(){
     
     $data["allowedReg"] = $this->dbmodel->checkRegEnabled();
+    $user = $this->input->post("user", TRUE);
+    $pass = sha1($this->input->post("pass", TRUE));
     
-    
-  
-		$this->load->view('header');
+    if($user){ //ha nem ures az usernev
+      $data["errormsg"] = "Hibás felhasznűló név vagy jelszó!";
+    }
+    $data["user"] = $user; //atadjuk, kenyelmi okokbol....
+    //vagy ures az user, vagy valamilyen hibat kapott $data["errormsg"]-be
+    $this->load->view('header');
     $this->load->view('content_login', $data);
     $this->load->view('footer');
   }
