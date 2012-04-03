@@ -36,7 +36,7 @@ font-size: 100%;
 }
 
 .menu_button{
-    display: none;
+    /*display: none;*/
     font-family: "Lucida Console", Arial;
     color: #007B25;
     text-decoration: none;
@@ -46,7 +46,7 @@ font-size: 100%;
     padding-bottom: 30px;
 }
 .menu_button_sel{
-    display: none;
+    /*display: none;*/
     font-family: "Lucida Console", Arial;
     color: #007B25;
     text-decoration: none;
