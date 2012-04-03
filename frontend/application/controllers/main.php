@@ -17,9 +17,11 @@ class Main extends CI_Controller {
   
   public function login(){
     $this->load->helper('form');
+    
+    $data["allowedReg"] = true; //TODO: táblában tárolni és lekérdezni a konfigot!
   
 		$this->load->view('header');
-    $this->load->view('content_login');
+    $this->load->view('content_login', $data);
     $this->load->view('footer');
   }
   
