@@ -17,8 +17,9 @@ class Main extends CI_Controller {
   
   public function login(){
     
+    $data["allowedReg"] = $this->dbmodel->checkRegEnabled();
     
-    $data["allowedReg"] = true; //TODO: táblában tárolni és lekérdezni a konfigot!
+    
   
 		$this->load->view('header');
     $this->load->view('content_login', $data);
