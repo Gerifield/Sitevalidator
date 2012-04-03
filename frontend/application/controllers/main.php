@@ -16,6 +16,8 @@ class Main extends CI_Controller {
 	}
   
   public function login(){
+    $this->load->helper('form');
+  
 		$this->load->view('header');
     $this->load->view('content_login');
     $this->load->view('footer');
