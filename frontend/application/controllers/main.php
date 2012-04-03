@@ -5,7 +5,7 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-    if(!$this->session->userdata('logged_in')){
+    if($this->session->userdata('logged_in')){
     
       $this->load->view('header');
       $this->load->view('menu');
