@@ -1,7 +1,8 @@
-<div class="content" style="text-align: center;">
-<form method="post" action="">
-<input type="text" name="user" /><br />
-<input type="password" name="pass" /><br />
-<input type="submit" value="Login" />
-</form>
-</div>
+      <div class="content">
+        <form method="post" action="">
+        <table style="margin-left: auto; margin-right: auto;">
+        <tr><td>Felhasználó név:</td><td><input type="text" name="user" /></td></tr>
+        <tr><td>Jelszó:</td><td><input type="password" name="pass" /></td></tr>
+        <tr><td></td><td><input type="submit" value="Login" /></td></tr>
+        </table>
+        </form>
