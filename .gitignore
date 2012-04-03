@@ -1,2 +1,2 @@
 *.pyc
-frontend/application/config/database.php
+*/config/database.php
