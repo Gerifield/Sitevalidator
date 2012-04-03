@@ -1,0 +1,69 @@
+/* reset */
+
+html, body, ul, ol, li, p,
+h1, h2, h3, h4, h5, h6,
+form, fieldset, a {
+margin: 0;
+padding: 0;
+border: 0;
+}
+
+body{
+font-size: 100.01%;
+background-color: #FFFFEF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-weight: normal;
+font-size: 100%;
+}
+
+
+/* CSS */
+
+
+
+.main_page{
+    margin-left: auto;
+    margin-right: auto;
+    width: 950px;
+}
+
+.menu{
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+.menu_button{
+    display: none;
+    font-family: "Lucida Console", Arial;
+    color: #007B25;
+    text-decoration: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.menu_button_sel{
+    display: none;
+    font-family: "Lucida Console", Arial;
+    color: #007B25;
+    text-decoration: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 33px;
+    background-color: #FFAD00;
+}
+
+.content{
+    display: none;
+    padding: 10px 10px 10px 10px;
+    border: 3px #FFAD00 solid;
+}
+
+.footer{
+  margin-top: 20px;
+  text-align: center;
+}
