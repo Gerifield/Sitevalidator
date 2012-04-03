@@ -20,5 +20,17 @@ class Dbmodel extends CI_Model {
         return false;
       }
     }
+    
+    function isAdmin($user){
+      $this->db->select("isadmin");
+      $this->db->where("user", $user);
+      $q = $this->db->get("users");
+      $row = $q->row_array();
+      if(isset($row["isadmin"])){
+        return ($row["isadmin"]==1) ? true : false; #1 esetén igaz
+      }else{
+        return false;
+      }
+    }
 
 }
