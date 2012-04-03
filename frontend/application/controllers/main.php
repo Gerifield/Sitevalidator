@@ -22,7 +22,12 @@ class Main extends CI_Controller {
     $pass = sha1($this->input->post("pass", TRUE));
     
     if($user){ //ha nem ures az usernev
-      $data["errormsg"] = "Hibás felhasznűló név vagy jelszó!";
+      if($this->dbmodel->checkLogin($user, $pass)){
+        $this->session->set_userdata( array( "logged_in" => true, "user" => $user) );
+        redirect("main/index");
+      }else{
+        $data["errormsg"] = "Hibás felhasznűló név vagy jelszó!";
+      }
     }
     $data["user"] = $user; //atadjuk, kenyelmi okokbol....
     //vagy ures az user, vagy valamilyen hibat kapott $data["errormsg"]-be
