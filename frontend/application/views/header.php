@@ -3,8 +3,8 @@
     <head>
     	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <title>Sitevalidator</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <script type = "text/javascript" src="jquery.min.js" ></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url("style.css"); ?>" />
+        <script type = "text/javascript" src="<?php echo base_url("jquery.min.js"); ?>" ></script>
     </head>
     <body>
         <div class="main_page">
