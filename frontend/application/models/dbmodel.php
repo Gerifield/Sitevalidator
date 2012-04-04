@@ -62,4 +62,28 @@ class Dbmodel extends CI_Model {
       $this->db->where("user", $user);
       $this->db->update("users", array('email' => $email) );
     }
+    
+    function checkUser($user){
+      $this->db->where("user", $user);
+      $q = $this->db->get("users");
+      if($q->num_rows() == 0){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
+    function checkEmail($email){
+      $this->db->where("email", $email);
+      $q = $this->db->get("users");
+      if($q->num_rows() == 0){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
+    function newReg($user, $email, $pass){
+      $this->db->insert("users", array("user" => $user, "email" => $email, "pass" => $pass) );
+    }
 }

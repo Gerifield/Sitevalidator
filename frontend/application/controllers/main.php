@@ -92,6 +92,10 @@ class Main extends CI_Controller {
 	}
   
   public function registration(){
+      if($this->session->userdata('logged_in')){ //ha mar be van lepve, dobja az indexre
+        redirect("main/index");
+      }
+      
       $data["allowedReg"] = $this->dbmodel->checkRegEnabled();
       
       if($data["allowedReg"]){ //regisztracio nincs kikapcsolva
@@ -104,8 +108,17 @@ class Main extends CI_Controller {
           $data["errormsg"] = "Minden adat kitöltése kötelező";
         }else{
           if($pass1 == $pass2){
-          
-            $data["successmsg"] = "Sikeres regisztráció!";
+            $pass = sha1($pass1);
+            if($this->dbmodel->checkUser($user)){
+              if($this->dbmodel->checkEmail($email)){
+                $this->dbmodel->newReg($user, $email, $pass);
+                $data["successmsg"] = "Sikeres regisztráció!";
+              }else{
+                $data["errormsg"] = "Az e-mail cím már használatban van!";
+              }
+            }else{
+              $data["errormsg"] = "A felhasználó név már használatban van!";
+            }
           }else{
             $data["errormsg"] = "A két jelszó nem egyezik!";
           }

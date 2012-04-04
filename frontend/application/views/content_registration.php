@@ -6,7 +6,7 @@
             echo '<div class="errormsg">'.$errormsg.'</div>';
           }
           if(isset($successmsg)){
-            echo '<div class="successmsg">'.$successmsg.'</div>';
+            echo '<div class="successmsg">'.$successmsg.'<br /><a href="'.site_url("main/index").'">Főoldal</a></div>';
           }
         ?>
         <form method="post" action="">
