@@ -46,7 +46,29 @@ class Main extends CI_Controller {
   public function profile(){
     if($this->session->userdata('logged_in')){
       
-      $data["email"] = "nope";
+      $email = $this->input->post("email", TRUE);
+      $pass1 = $this->input->post("pass1", TRUE);
+      $pass2 = $this->input->post("pass2", TRUE);
+      
+      if($pass1){ //ha van benne adat
+        if($pass1 == $pass2){
+          //pass módosítva
+          $this->dbmodel->updatePass($this->session->userdata("user"), sha1($pass1));
+          $data["successmsg"] = "Sikeres jelszó módosítás!";
+        }else{
+          $data["errormsg"] = "Nem egyezik a két jelszó!";
+        }
+      }
+      if($email){ //ha nem üres, frissítjük
+        $this->dbmodel->updateEmail($this->session->userdata("user"), $email);
+        if(!isset($data["successmsg"])){ //ha nem módosult a jelszó, akkor írjuk ezt ki!
+          $data["successmsg"] = "Sikeres e-mail módosítás!";
+        }
+      }
+      
+      
+      $query = $this->dbmodel->getUserData($this->session->userdata("user"));
+      $data["email"] = $query["email"];
       
       $this->load->view('header');
       $this->load->view('menu');

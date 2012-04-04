@@ -2,6 +2,9 @@
       if(isset($errormsg)){
         echo '<div class="errormsg">'.$errormsg.'</div>';
       }
+      if(isset($successmsg)){
+        echo '<div class="successmsg">'.$successmsg.'</div>';
+      }
       ?>
       <form method="post" action="">
       <table style="margin-left: auto; margin-right: auto;">

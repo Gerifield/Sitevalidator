@@ -67,3 +67,8 @@ font-size: 100%;
   font-weight: bold;
   text-align: center;
 }
+.successmsg{
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}
