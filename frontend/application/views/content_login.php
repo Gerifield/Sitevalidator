@@ -11,7 +11,7 @@
         <tr><td></td><td><input type="submit" value="Login" /></td></tr>
         <?php
         if($allowedReg){
-          echo '<tr><td></td><td><a href="#">Regisztrál</a></td></tr>';
+          echo '<tr><td></td><td><a href="'.site_url("main/registration").'">Regisztrál</a></td></tr>';
         }
         ?>
         </table>

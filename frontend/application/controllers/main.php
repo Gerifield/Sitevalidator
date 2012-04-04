@@ -90,6 +90,12 @@ class Main extends CI_Controller {
       redirect("main/index");
     }
 	}
+  
+  public function registration(){
+      $this->load->view('header');
+      $this->load->view('content_registration');
+      $this->load->view('footer');
+  }
 }
 
 /* End of file main.php */
