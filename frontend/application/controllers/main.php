@@ -41,6 +41,10 @@ class Main extends CI_Controller {
         $this->session->sess_destroy();
         redirect("main/index");
     }
+    
+    public function profil(){
+      
+    }
 }
 
 /* End of file main.php */
