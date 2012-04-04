@@ -16,7 +16,7 @@ class Dbmodel extends CI_Model {
         return false;
       }
     }
-    function RegToggle($value){ //true/false
+    function regToggle($value){ //true/false
       $this->db->where("data", "registration");
       if($value){ //ha igaz, engedelyezi
         $this->db->update("page_config", array('value' => '1') );

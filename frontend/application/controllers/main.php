@@ -81,10 +81,22 @@ class Main extends CI_Controller {
 	public function admin()
 	{
     if($this->session->userdata('logged_in') && $this->dbmodel->isAdmin($this->session->userdata("user"))){
-    
+
+      if($this->input->post("formsent", TRUE)){ //itt az XSS check elhagyható
+        //ha el lett küldve a form!
+        if($this->input->post("freereg", TRUE)){ //checkbox bepipálva
+          $this->dbmodel->regToggle(true);
+        }else{ //chekcbox üres
+          $this->dbmodel->regToggle(false);
+        }
+        $data["successmsg"] = "Sikeres adatmódosítás!";
+      }
+      
+      $data["freereg"] = $this->dbmodel->checkRegEnabled(); //ellenőrzésnek a DB-ből kérjük
+      
       $this->load->view('header');
       $this->load->view('menu');
-      //TODO: tartalom
+      $this->load->view('content_admin', $data);
       $this->load->view('footer');
     }else{
       redirect("main/index");
