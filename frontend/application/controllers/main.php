@@ -92,8 +92,32 @@ class Main extends CI_Controller {
 	}
   
   public function registration(){
+      $data["allowedReg"] = $this->dbmodel->checkRegEnabled();
+      
+      if($data["allowedReg"]){ //regisztracio nincs kikapcsolva
+        $user = $this->input->post("user", TRUE);
+        $email = $this->input->post("email", TRUE);
+        $pass1 = $this->input->post("pass1", TRUE);
+        $pass2 = $this->input->post("pass2", TRUE);
+        
+        if(empty($user) || empty($email) || empty($pass1) || empty($pass2)){
+          $data["errormsg"] = "Minden adat kitöltése kötelező";
+        }else{
+          if($pass1 == $pass2){
+          
+            $data["successmsg"] = "Sikeres regisztráció!";
+          }else{
+            $data["errormsg"] = "A két jelszó nem egyezik!";
+          }
+        }
+        
+        $data["user"] = $user;
+        $data["email"] = $email;
+      }
+      
+      //ha nincs reg. rengedve, akkor is atmeggy az "allowedReg" false-al
       $this->load->view('header');
-      $this->load->view('content_registration');
+      $this->load->view('content_registration', $data);
       $this->load->view('footer');
   }
 }
