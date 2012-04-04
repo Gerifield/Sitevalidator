@@ -6,7 +6,7 @@
             echo '<div class="errormsg">'.$errormsg.'</div>';
           }
           if(isset($successmsg)){
-            echo '<div class="successmsg">'.$successmsg.'<br /><a href="'.site_url("main/index").'">Főoldal</a></div>';
+            echo '<div class="successmsg">'.$successmsg.'</div>';
           }
         ?>
         <form method="post" action="">
@@ -24,3 +24,5 @@
           echo '<div class="errormsg">A regisztráció szünetel!</div>';
         }
         ?>
+        <br />
+        <div style="text-align: center;"><a href="<?php echo site_url("main/index"); ?>">Főoldal</a></div>
