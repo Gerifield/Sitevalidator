@@ -54,20 +54,19 @@ class Main extends CI_Controller {
         if($pass1 == $pass2){
           //pass módosítva
           $this->dbmodel->updatePass($this->session->userdata("user"), sha1($pass1));
-          $data["successmsg"] = "Sikeres jelszó módosítás!";
+          $data["successmsg"] = "Sikeres jelszó módosítás!"; //csak akkor, ha tenyleg modosult
         }else{
-          $data["errormsg"] = "Nem egyezik a két jelszó!";
+          $data["errormsg"] = "Nem egyezik a két jelszó!"; //ha nem passzolt a 2 jelszo
         }
       }
       if($email){ //ha nem üres, frissítjük
         $this->dbmodel->updateEmail($this->session->userdata("user"), $email);
-        if(!isset($data["successmsg"])){ //ha nem módosult a jelszó, akkor írjuk ezt ki!
+        if(!isset($data["successmsg"])){ //ha nem módosult a jelszó, akkor írjuk ezt ki (vagyis mindig, amikor a formot elkuldik)
           $data["successmsg"] = "Sikeres e-mail módosítás!";
         }
       }
       
-      
-      $query = $this->dbmodel->getUserData($this->session->userdata("user"));
+      $query = $this->dbmodel->getUserData($this->session->userdata("user")); //DB-bol kerjuk le, az a biztos
       $data["email"] = $query["email"];
       
       $this->load->view('header');
