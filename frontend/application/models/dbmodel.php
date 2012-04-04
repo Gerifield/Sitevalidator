@@ -7,7 +7,14 @@ class Dbmodel extends CI_Model {
     }
     
     function checkRegEnabled(){
-      return true; //TODO: Lekérés generálás hozzá
+      $this->db->where("data", "registration");
+      $q = $this->db->get("page_config");
+      $row = $q->row_array();
+      if($row["value"] == 1){
+        return true;
+      }else{
+        return false;
+      }
     }
     
     function checkLogin($user, $pass){
