@@ -72,3 +72,7 @@ font-size: 100%;
   font-weight: bold;
   text-align: center;
 }
+
+.proc_table{
+  border: 3px #FFAD00 solid;
+}

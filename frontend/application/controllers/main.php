@@ -9,7 +9,7 @@ class Main extends CI_Controller {
     
       $this->load->view('header');
       $this->load->view('menu');
-      //TODO: tartalom
+      $this->load->view('content_main');
       $this->load->view('footer');
     }else{
       redirect("main/login");
