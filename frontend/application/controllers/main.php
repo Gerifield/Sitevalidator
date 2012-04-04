@@ -36,15 +36,22 @@ class Main extends CI_Controller {
     $this->load->view('footer');
   }
   
-    public function logout(){
-        $this->session->set_userdata("logged_in", false);
-        $this->session->sess_destroy();
-        redirect("main/index");
-    }
+  public function logout(){
+      $this->session->set_userdata("logged_in", false);
+      $this->session->sess_destroy();
+      redirect("main/index");
+  }
     
-    public function profil(){
+  public function profil(){
+    if($this->session->userdata('logged_in')){
+    
+      $this->load->view('header');
       
+      $this->load->view('footer');
+    }else{
+      redirect("main/login");
     }
+  }
 }
 
 /* End of file main.php */
