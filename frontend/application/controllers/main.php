@@ -9,6 +9,7 @@ class Main extends CI_Controller {
     
       $this->load->view('header');
       $this->load->view('menu');
+      //TODO: tartalom
       $this->load->view('footer');
     }else{
       redirect("main/login");
@@ -42,11 +43,14 @@ class Main extends CI_Controller {
       redirect("main/index");
   }
     
-  public function profil(){
+  public function profile(){
     if($this->session->userdata('logged_in')){
-    
-      $this->load->view('header');
       
+      $data["email"] = "nope";
+      
+      $this->load->view('header');
+      $this->load->view('menu');
+      $this->load->view('content_profile', $data);
       $this->load->view('footer');
     }else{
       redirect("main/login");
