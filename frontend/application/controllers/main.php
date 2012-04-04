@@ -77,6 +77,19 @@ class Main extends CI_Controller {
       redirect("main/login");
     }
   }
+  
+	public function admin()
+	{
+    if($this->session->userdata('logged_in') && $this->dbmodel->isAdmin($this->session->userdata("user"))){
+    
+      $this->load->view('header');
+      $this->load->view('menu');
+      //TODO: tartalom
+      $this->load->view('footer');
+    }else{
+      redirect("main/index");
+    }
+	}
 }
 
 /* End of file main.php */
