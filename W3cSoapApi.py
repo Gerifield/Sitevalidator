@@ -72,11 +72,6 @@ class W3cSoapApi:
     except:
       return "Error"
 
-  def getCSSCharset(self):
-    try:
-      return self.csssoup.first('m:charset').string
-    except:
-      return "Error"
 
   def isValidCSS(self):
     try:
