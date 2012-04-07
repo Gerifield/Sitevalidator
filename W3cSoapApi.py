@@ -68,7 +68,7 @@ class W3cSoapApi:
 
   def getCSSDoctype(self):
     try:
-      return self.csssoup.first('m:doctype').string
+      return self.csssoup.first('m:csslevel').string
     except:
       return "Error"
 
@@ -117,6 +117,9 @@ class W3cSoapApi:
     ret = urllib2.urlopen(req)
     self.cssresheads = ret.info()
     resdata = ret.read()
+    print "\n\n"
+    print resdata
+    print "\n\n"
     
     self.csssoup = BeautifulSoup(resdata, convertEntities=BeautifulSoup.HTML_ENTITIES)
     
