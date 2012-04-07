@@ -12,14 +12,9 @@ import W3cSoapApi
 def postResults(cburl, results):
   print "URL: "+cburl
   req = urllib2.Request(cburl, urllib.urlencode({"json-data": json.dumps(results)}) )
-  #req.add_header('Content-Type', 'application/json')
   req.add_header("Content-type", "application/x-www-form-urlencoded")
   res = urllib2.urlopen(req)
   print res.read()
-  """
-  conn = httplib.HTTPConnection(cburl)
-  conn.request("POST", "/saver.php", encjson, {"Content-type": "application/json"})
-  print conn.getresponse()"""
 
 def urlCheck(str):
   check = urlparse(str)
