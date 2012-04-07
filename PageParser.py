@@ -13,8 +13,10 @@ class PageParser:
   aloldal = 0
   error = False
   errormsg = ""
+  xmlFormat = False
   
-  #TODO!!!!!!!!!!!! -> A linkek vegen legalbb egy / kell legyen!!!
+  def setXmlFormat(self, val):
+    self.xmlFormat = val
   
   def __init__(self, url):
     if url.endswith("/") or not self.checkEnding(url):
@@ -83,7 +85,10 @@ class PageParser:
         
         
         #TODO: "Inline" CSS es Javascript kodokat lekezelni!
-        tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
+        if self.xmlFormat:
+          tags = soup.findAll('a') #ha xml-t kap, batran szedhet minden a tagot ki belole
+        else:
+          tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
         #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet
         for tag in tags:
           if tag.has_key('href'):
