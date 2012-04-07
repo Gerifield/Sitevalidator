@@ -45,7 +45,8 @@ def main():
     else:
       print "Valid, doc: ", val.getDoctype()
     print "CSS: ", val.getCSSDoctype()
-    if not val.isValid():
+    print "CSS BOOL: ", val.isValidCSS()
+    if not val.isValidCSS():
       print "Error: ", val.getCSSErrorNum()
       print "Warning: ", val.getCSSErrorNum()
     else:
