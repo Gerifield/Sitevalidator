@@ -14,7 +14,7 @@ def postResults(cburl, results):
   req = urllib2.Request(cburl, urllib.urlencode({"json-data": json.dumps(results)}) )
   req.add_header("Content-type", "application/x-www-form-urlencoded")
   res = urllib2.urlopen(req)
-  print res.read()
+  #print res.read()
 
 def urlCheck(str):
   check = urlparse(str)
@@ -27,7 +27,7 @@ def urlCheck(str):
 def main():
   parser = argparse.ArgumentParser(description='Sitevalidator alkalmazas, weboldalak teljes validalasahoz.')
   parser.add_argument('--xml', action='store_true', help='Google sitemap használatához kapcsoló.')
-  parser.add_argument('--format', choices=['short', 'long'], default='long', help='A kimenet formázása.')
+  parser.add_argument('--format', choices=['silent', 'long'], default='long', help='A kimenet formázása.')
   parser.add_argument('--callback', help='Futtatás után ezt az oldalt hívja meg az eredményekkel.')
   parser.add_argument('url', metavar='URL', type=urlCheck, help='Validalni kívánt oldal URL címe.')
   
@@ -41,35 +41,37 @@ def main():
   if args.xml:
     pp.setXmlFormat(True) # ha XML kapcsolo is van, akkor ezt jelezzuk az URL gyujtonek
   pp.parsePage()
-  print "Talat linkek: "+str(len(pp.getLinks()))
-  print pp.getLinks()
+  
+  if args.format == 'long':
+    print "Talat linkek: "+str(len(pp.getLinks()))
+    print pp.getLinks()
  
   val = W3cSoapApi.W3cSoapApi()
 
   for i in range(len(pp.getLinks())):
     val.setUrl(pp.getLinks()[i])
     val.parseAll()
-    """
-    print "Page: ", val.getUrl()
-    print "HTML: ", val.getDoctype()
-    if not val.isValid():
-      print "Error: ", val.getErrorNum()
-      print "Warning: ", val.getWarningNum()
-    else:
-      print "Valid, doc: ", val.getDoctype()
-    print "CSS: ", val.getCSSDoctype()
-    print "CSS BOOL: ", val.isValidCSS()
-    if not val.isValidCSS():
-      print "Error: ", val.getCSSErrorNum()
-      print "Warning: ", val.getCSSWarningNum()
-    else:
-      print "Valid, doc: ", val.getCSSDoctype()
-    """
+    if args.format == 'long':
+      print "Page: ", val.getUrl()
+      print "HTML: ", val.getDoctype()
+      if not val.isValid():
+        print "Error: ", val.getErrorNum()
+        print "Warning: ", val.getWarningNum()
+      else:
+        print "Valid, doc: ", val.getDoctype()
+      print "CSS: ", val.getCSSDoctype()
+      print "CSS BOOL: ", val.isValidCSS()
+      if not val.isValidCSS():
+        print "Error: ", val.getCSSErrorNum()
+        print "Warning: ", val.getCSSWarningNum()
+      else:
+        print "Valid, doc: ", val.getCSSDoctype()
+    
     if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
       results.append([val.getUrl(), val.getDoctype(), val.isValid(), val.getErrorNum(), val.getWarningNum(),
                       val.getCSSDoctype(), val.isValidCSS(), val.getCSSErrorNum(), val.getCSSWarningNum()])
       # URL, doctype, valid-e, error, warning, csstype, valid-e, error, warning
-    print "."
+    #print "."
     time.sleep(1) #legalabb 1 sec kell
 
   if args.callback:

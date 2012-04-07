@@ -30,13 +30,13 @@ class PageParser:
   
   def addUrl(self, url):
     if not url.startswith("http"):
-      print "MURL: ", url
+      #print "MURL: ", url
       url = urlparse.urljoin(self.latesturl, url) #Extrem esetben hibas lehet!
-      print "Mod: "+url
+      #print "Mod: "+url
     if self.finurl.count(url) == 0 and self.urllist.count(url) == 0: #ha eddig nem dolgoztuk fel es nincs a varakozok kozott sem
       self.urllist.append(url)
       self.aloldal += 1
-      print "Added! Num: ", self.aloldal, url
+      #print "Added! Num: ", self.aloldal, url
     
   def hasUrl(self):
     return len(self.urllist) > 0
