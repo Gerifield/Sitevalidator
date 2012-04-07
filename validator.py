@@ -8,6 +8,9 @@ from urlparse import urlparse
 import PageParser
 import W3cSoapApi
 
+def postResults(cburl, results):
+  print cburl
+  print results
 
 
 def urlCheck(str):
@@ -22,11 +25,14 @@ def main():
   parser = argparse.ArgumentParser(description='Sitevalidator alkalmazas, weboldalak teljes validalasahoz.')
   parser.add_argument('--xml', action='store_true', help='Google sitemap használatához kapcsoló.')
   parser.add_argument('--format', choices=['short', 'long'], default='long', help='A kimenet formázása.')
-  parser.add_argument('url', metavar='URL', type=urlCheck, help='Validalni kivant oldal URL cime')
+  parser.add_argument('--callback', help='Futtatás után ezt az oldalt hívja meg az eredményekkel.')
+  parser.add_argument('url', metavar='URL', type=urlCheck, help='Validalni kívánt oldal URL címe.')
+  
   #parser.print_help()
   args = parser.parse_args()
-  #print args
+  print args
   #print args.url
+  results = []
   
   pp = PageParser.PageParser(args.url)
   pp.parsePage()
@@ -37,22 +43,34 @@ def main():
   for i in range(len(pp.getLinks())):
     val.setUrl(pp.getLinks()[i])
     val.parseAll()
+    """
     print "Page: ", val.getUrl()
     print "HTML: ", val.getDoctype()
     if not val.isValid():
       print "Error: ", val.getErrorNum()
-      print "Warning: ", val.getErrorNum()
+      print "Warning: ", val.getWarningNum()
     else:
       print "Valid, doc: ", val.getDoctype()
     print "CSS: ", val.getCSSDoctype()
     print "CSS BOOL: ", val.isValidCSS()
     if not val.isValidCSS():
       print "Error: ", val.getCSSErrorNum()
-      print "Warning: ", val.getCSSErrorNum()
+      print "Warning: ", val.getCSSWarningNum()
     else:
       print "Valid, doc: ", val.getCSSDoctype()
+    """
+    if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
+      results.append([val.getUrl(), val.getDoctype(), val.isValid(), val.getErrorNum(), val.getWarningNum(),
+                      val.getCSSDoctype(), val.isValidCSS(), val.getCSSErrorNum(), val.getCSSWarningNum()])
+      # URL, doctype, valid-e, error, warning, csstype, valid-e, error, warning
+    print "."
     time.sleep(1) #legalabb 1 sec kell
 
+  if args.callback:
+    print "Van callback: ",args.callback
+    postResults(args.callback, results)
+    
+  
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
   #r = urllib2.urlopen(req)
