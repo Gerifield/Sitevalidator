@@ -30,16 +30,19 @@ def main():
   
   #parser.print_help()
   args = parser.parse_args()
-  print args
+  #print args
   #print args.url
   results = []
   
   pp = PageParser.PageParser(args.url)
+  if args.xml:
+    pp.setXmlFormat(True) # ha XML kapcsolo is van, akkor ezt jelezzuk az URL gyujtonek
   pp.parsePage()
   print "Talat linkek: "+str(len(pp.getLinks()))
   print pp.getLinks()
  
   val = W3cSoapApi.W3cSoapApi()
+
   for i in range(len(pp.getLinks())):
     val.setUrl(pp.getLinks()[i])
     val.parseAll()
@@ -67,7 +70,7 @@ def main():
     time.sleep(1) #legalabb 1 sec kell
 
   if args.callback:
-    print "Van callback: ",args.callback
+    #print "Van callback: ",args.callback
     postResults(args.callback, results)
     
   
