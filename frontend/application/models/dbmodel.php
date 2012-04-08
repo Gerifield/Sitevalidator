@@ -86,4 +86,37 @@ class Dbmodel extends CI_Model {
     function newReg($user, $email, $pass){
       $this->db->insert("users", array("user" => $user, "email" => $email, "pass" => $pass) );
     }
+    
+    function getUidByUser($user){
+      $this->db->where("user", $user);
+      $q = $this->db->get("users");
+      $ret = $q->row_array();
+      return $ret["id"];
+    }
+    function getUserByUid($uid){
+      $this->db->where("id", $uid);
+      $q = $this->db->get("users");
+      $ret = $q->row_array();
+      return $ret["user"];
+    }
+    
+    function getAllProcessDataByUid($uid){
+      $this->db->where("uid", $uid);
+      $q = $this->db->get("processes");
+      $result = array(); // ha üres lenne a lekérés
+      foreach($q->result_array() as $row){
+        $result[$row['id']] = array($row['id'], $row['url'], $row['state'], $row['time'],
+        $row['htmlvalidity'], $row['htmldoctype'], $row['htmlerrornum'], $row['htmlwarningnum'],
+        $row['cssvalidity'], $row['cssdoctype'], $row['csserrornum'], $row['csswarningnum']);
+      }
+      return $result; // Forma: [id => [adatok], id => [adatok]]
+    }
+    
+    function addNewProcess(){
+      
+    }
+    
+    function updateProcess(){
+      
+    }
 }

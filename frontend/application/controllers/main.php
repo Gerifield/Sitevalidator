@@ -3,15 +3,15 @@
 class Main extends CI_Controller {
 
 
-	public function index()
+	public function index($id = false)
 	{
     if($this->session->userdata('logged_in')){
       
-      $inurl = $this->input->post("add_url", TRUE);
+      $inurl = $this->input->post("inurl", TRUE);
       if($inurl){
         //TODO kódolás
       }
-      $data["datalist"] = ""; //TODO: Lekérdezés
+      $data["datalist"] = $this->dbmodel->getAllProcessDataByUid($this->dbmodel->getUidByUser($this->session->userdata('user')));
       
       $this->load->view('header');
       $this->load->view('menu');
