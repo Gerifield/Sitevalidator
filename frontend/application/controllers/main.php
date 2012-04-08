@@ -6,10 +6,16 @@ class Main extends CI_Controller {
 	public function index()
 	{
     if($this->session->userdata('logged_in')){
-    
+      
+      $inurl = $this->input->post("add_url", TRUE);
+      if($inurl){
+        //TODO kódolás
+      }
+      $data["datalist"] = ""; //TODO: Lekérdezés
+      
       $this->load->view('header');
       $this->load->view('menu');
-      $this->load->view('content_main');
+      $this->load->view('content_main', $data);
       $this->load->view('footer');
     }else{
       redirect("main/login");
