@@ -1,5 +1,6 @@
 <form method="post" action="">
-<p>URL: <input type="text" name="inurl" /> Időpont: <input type="text" name="runtime" /><input type="submit" value="Hozzáad" /></p>
+<p>URL*: <input type="text" name="inurl" size="70" /> Időpont: <input type="text" name="runtime" /><input type="submit" value="Hozzáad" />
+<br /><div style="font-size:85%">*:Teljes url cím, http-vel és .html, .html, .php vagy .asp végződéssel!</div></p>
 </form>
 <br />
 <table class="proc_table">

@@ -4,8 +4,10 @@
     	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <title>Sitevalidator</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url("style.css"); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url("jquery-ui-1.8.18.custom.css"); ?>" />
         <script type = "text/javascript" src="<?php echo base_url("jquery.min.js"); ?>" ></script>
-        <script type = "text/javascript" src="<?php echo base_url("jquery.watermark.min.js"); ?>" ></script>
+        <script type = "text/javascript" src="<?php echo base_url("jquery-ui-1.8.18.custom.min.js"); ?>" ></script>
+        <script type = "text/javascript" src="<?php echo base_url("jquery-ui-timepicker-addon.js"); ?>" ></script>
         <script type="text/javascript">
           $(document).ready(function() {
 
@@ -16,7 +18,11 @@
                   document.location.href = "<?php echo site_url("main/details"); ?>/"+id;
               });
             
-              $('input[name="runtime"]').watermark("ÉÉÉÉ.HH.NN ÓÓ:PP");
+              //$('input[name="runtime"]').watermark("ÉÉÉÉ.HH.NN ÓÓ:PP");
+              $('input[name="runtime"]').datetimepicker({
+                  minDate: 0,
+                  dateFormat: "yy-mm-dd"
+                  });
           });
         </script>
     </head>
