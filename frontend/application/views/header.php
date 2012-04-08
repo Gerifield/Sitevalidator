@@ -21,6 +21,7 @@
               //$('input[name="runtime"]').watermark("ÉÉÉÉ.HH.NN ÓÓ:PP");
               $('input[name="runtime"]').datetimepicker({
                   minDate: 0,
+                  maxDate: 300, //max 300 nappal elore lehet beallitani
                   dateFormat: "yy-mm-dd"
                   });
           });

@@ -1,3 +1,8 @@
+<?php
+if(!$datalist):
+  echo "Ismeretlen ID vagy tiltott hozzáférés.";
+else:
+?>
 <table class="proc_table" style="width: 100%">
 <tr><td>ID:</td><td><?php echo $datalist["id"]; ?></td></tr>
 <tr><td>URL:</td><td><?php echo $datalist["url"]; ?></td></tr>
@@ -14,3 +19,6 @@
 <tr><td>CSS hibák:</td><td><?php echo $datalist["csserrornum"]; ?></td></tr>
 <tr><td>CSS figyelmeztetések:</td><td><?php echo $datalist["csswarningnum"]; ?></td></tr>
 </table>
+<?php
+endif;
+?>
