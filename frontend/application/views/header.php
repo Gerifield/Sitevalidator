@@ -11,12 +11,8 @@
 
               $('.proc_table tr.clickable').click(function(){
                   var id = $(this).children("td:first").text(); //select the first td item
-                  if(!$("#id"+id).is(":visible")){
-                    $("#id"+id).show();
-                  }
-              });
-              $('.overlay').click(function(){
-                $(this).hide();
+                  //TODO: Valami szexi cucc...
+                  alert(id);
               });
 
           });

@@ -95,14 +95,3 @@ font-size: 100%;
 .proc_table th, .proc_table td{
   padding: 3px 5px;
 }
-
-.overlay{
-  width: 500px;
-  height: 400px;
-  background-color: lightgrey;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -250px;
-  margin-top: -200px;
-}

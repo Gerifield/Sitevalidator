@@ -17,16 +17,3 @@
   endforeach;
 ?>
 </table>
-
-<?php
-  foreach($datalist as $row):
-?>
-<div id="id<?php echo $row['id']; ?>" class="overlay" style="display:none;">
-Sok<br />
-adat<br />
-jön<br />
-ide<br />
-</div>
-<?php
-  endforeach;
-?>
