@@ -12,7 +12,8 @@
               $('.proc_table tr.clickable').click(function(){
                   var id = $(this).children("td:first").text(); //select the first td item
                   //TODO: Valami szexi cucc...
-                  alert(id);
+                  //alert(id);
+                  document.location.href = "<?php echo site_url("main/details"); ?>/"+id;
               });
 
           });

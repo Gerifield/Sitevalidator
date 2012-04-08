@@ -3,7 +3,7 @@
 class Main extends CI_Controller {
 
 
-	public function index($id = false)
+	public function index()
 	{
     if($this->session->userdata('logged_in')){
       
@@ -149,6 +149,17 @@ class Main extends CI_Controller {
       $this->load->view('header');
       $this->load->view('content_registration', $data);
       $this->load->view('footer');
+  }
+  
+  public function details($id = false){
+    if($id){
+      $this->load->view('header');
+      $this->load->view('menu');
+      $this->load->view('content_procdetails');
+      $this->load->view('footer');
+    }else{
+      redirect("main/index");
+    }
   }
 }
 
