@@ -91,7 +91,6 @@ font-size: 100%;
 .proc_table td:hover{
   cursor: pointer;
 }
-
 .proc_table th, .proc_table td{
   padding: 3px 5px;
 }
