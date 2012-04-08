@@ -105,9 +105,9 @@ class Dbmodel extends CI_Model {
       $q = $this->db->get("processes");
       $result = array(); // ha üres lenne a lekérés
       foreach($q->result_array() as $row){
-        $result[$row['id']] = array($row['id'], $row['url'], $row['state'], $row['time'],
-        $row['htmlvalidity'], $row['htmldoctype'], $row['htmlerrornum'], $row['htmlwarningnum'],
-        $row['cssvalidity'], $row['cssdoctype'], $row['csserrornum'], $row['csswarningnum']);
+        array_push( $result, array('id' => $row['id'], 'url' => $row['url'], 'state' => $row['state'], 'runtime' => $row['runtime'],
+        'htmlvalidity' => $row['htmlvalidity'], 'htmldoctype' => $row['htmldoctype'], 'htmlerrornum' => $row['htmlerrornum'], 'htmlwarningnum' => $row['htmlwarningnum'],
+        'cssvalidity' => $row['cssvalidity'], 'cssdoctype' => $row['cssdoctype'], 'csserrornum' => $row['csserrornum'], 'csswarningnum' => $row['csswarningnum']) );
       }
       return $result; // Forma: [id => [adatok], id => [adatok]]
     }
