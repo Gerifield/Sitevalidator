@@ -73,6 +73,25 @@ font-size: 100%;
   text-align: center;
 }
 
+
+
 .proc_table{
+  border-collapse: collapse;
   border: 3px #FFAD00 solid;
+}
+.proc_table tr{
+  border-top: 1px solid #ffffff;
+}
+.proc_table tr:hover{
+  background-color: lightgrey;
+}
+.proc_table th{
+  background-color: #FFAD00;
+}
+.proc_table td:hover{
+  cursor: pointer;
+}
+
+.proc_table th, .proc_table td{
+  padding: 3px 5px;
 }

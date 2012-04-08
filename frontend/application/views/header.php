@@ -5,6 +5,19 @@
         <title>Sitevalidator</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url("style.css"); ?>" />
         <script type = "text/javascript" src="<?php echo base_url("jquery.min.js"); ?>" ></script>
+        
+        <script type="text/javascript">
+          $(document).ready(function() {
+
+              $('.proc_table tr.clickable').click(function(){
+                  var id = $(this).children("td:first").text(); //select the first td item
+                  if(!$("#id"+id).is(":visible")){
+                    
+                  }
+              });
+
+          });
+        </script>
     </head>
     <body>
         <div class="main_page">
