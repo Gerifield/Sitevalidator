@@ -21,7 +21,7 @@
 <?php
   foreach($datalist as $row):
 ?>
-<div id="id<?php echo $row['id']; ?>" style="display:none">
+<div id="id<?php echo $row['id']; ?>" class="overlay" style="display:none;">
 Sok<br />
 adat<br />
 jön<br />
