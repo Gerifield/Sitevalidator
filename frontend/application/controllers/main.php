@@ -153,9 +153,10 @@ class Main extends CI_Controller {
   
   public function details($id = false){
     if($id){
+      $data["datalist"] = $this->dbmodel->getProcessDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
       $this->load->view('header');
       $this->load->view('menu');
-      $this->load->view('content_procdetails');
+      $this->load->view('content_procdetails', $data);
       $this->load->view('footer');
     }else{
       redirect("main/index");

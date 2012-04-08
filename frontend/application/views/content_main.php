@@ -1,5 +1,5 @@
 <form method="post" action="">
-<p>URL: <input type="text" name="inurl" /> <input type="submit" value="Hozzáad" /></p>
+<p>URL: <input type="text" name="inurl" /> Időpont: <input type="text" name="runtime" /><input type="submit" value="Hozzáad" /></p>
 </form>
 <br />
 <table class="proc_table">

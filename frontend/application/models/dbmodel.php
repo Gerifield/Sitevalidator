@@ -121,6 +121,16 @@ class Dbmodel extends CI_Model {
       }
       return $result; // Forma: [id => [adatok], id => [adatok]]
     }
+    function getProcessDataById($id, $uid){
+      $this->db->where("id", $id);
+      $this->db->where("uid", $uid);
+      $q = $this->db->get("processes");
+      if($q->num_rows() > 0){
+        return $q->row_array();
+      }else{
+        return false;
+      }
+    }
     
     function addNewProcess(){
       
