@@ -5,12 +5,34 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-    if($this->session->userdata('logged_in')){
-      
+    if($this->session->userdata('logged_in')){      
       $inurl = $this->input->post("inurl", TRUE);
+      $data["inurl"] = $inurl;
+      $data["runtime"] = $this->input->post("runtime", TRUE);
       if($inurl){
         //TODO kódolás
+        $stamp = strtotime($this->input->post("runtime", TRUE));
+        if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
+        //print "OK";
+        //print $stamp." -> ".date("Y-m-d H:i", $stamp);
+        $vegzodes3 = array("htm", "php", "asp");
+        $vegzodes4 = array("html");
+        
+        if(substr($inurl, 0, 7) == "http://"){
+          if(in_array(substr($inurl, -3), $vegzodes3) or in_array(substr($inurl, -4), $vegzodes4)){
+            
+            $data["inurl"] = "";
+            $data["runtime"] = "";
+          }else{
+            $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
+          }
+        }else{
+          $data["errormsg"] = "Az URL-nek http://-el kell kezdődnie!.";
+        }
+      }else{
+        $data["errormsg"] = "Rossz dátum formázás.";
       }
+    }
       $data["datalist"] = $this->dbmodel->getAllProcessDataByUid($this->dbmodel->getUidByUser($this->session->userdata('user')));
       $this->load->view('header');
       $this->load->view('menu');
@@ -153,6 +175,34 @@ class Main extends CI_Controller {
   
   public function details($id = false){
     if($id){
+      $inurl = $this->input->post("inurl", TRUE);
+      $data["inurl"] = $inurl;
+      $data["runtime"] = $this->input->post("runtime", TRUE);
+      if($inurl){
+        //TODO kódolás
+        $stamp = strtotime($this->input->post("runtime", TRUE));
+        if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
+          //print "OK";
+          //print $stamp." -> ".date("Y-m-d H:i", $stamp);
+          $vegzodes3 = array("htm", "php", "asp");
+          $vegzodes4 = array("html");
+          
+          if(substr($inurl, 0, 7) == "http://"){
+            if(in_array(substr($inurl, -3), $vegzodes3) or in_array(substr($inurl, -4), $vegzodes4)){
+              
+              $data["inurl"] = "";
+              $data["runtime"] = "";
+            }else{
+              $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
+            }
+          }else{
+            $data["errormsg"] = "Az URL-nek http://-el kell kezdődnie!.";
+          }
+        }else{
+          $data["errormsg"] = "Rossz dátum formázás.";
+        }
+      }
+
       $data["datalist"] = $this->dbmodel->getProcessDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
       $this->load->view('header');
       $this->load->view('menu');
