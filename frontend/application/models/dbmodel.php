@@ -136,8 +136,10 @@ class Dbmodel extends CI_Model {
       $this->db->insert("processes", array('token' => sha1($uid.$url.$runtime), 'url' => $url, 'runtime' => $runtime, 'uid' => $uid));
     }
     
-    function updateProcess(){
-      
+    function updateProcess($id, $url, $runtime, $uid){ //UID-vel is azonosít, csak sajátot írhat felül
+      $this->db->where("id", $id);
+      $this->db->where("uid", $uid);
+      $this->db->update("processes", array('url' => $url, 'runtime' => $runtime));
     }
     
     function delProcess($id, $uid){ //az UID-vel ellenõrizhetõ, hogy a sajátja-e

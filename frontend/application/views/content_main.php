@@ -2,6 +2,9 @@
 if(isset($errormsg)){
 	echo '<div class="errormsg">'.$errormsg.'</div>';
 }
+if(isset($successmsg)){
+  echo '<div class="successmsg">'.$successmsg.'</div>';
+}
 ?>
 <form method="post" action="">
 <p>URL*: <input type="text" name="inurl" value="<?php echo $inurl; ?>" size="70" /> Időpont: <input type="text" name="runtime" value="<?php echo $runtime; ?>" /><input type="submit" value="Hozzáad" />

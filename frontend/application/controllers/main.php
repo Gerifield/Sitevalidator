@@ -20,6 +20,7 @@ class Main extends CI_Controller {
           if(preg_match("/(htm|html|php|asp)$/", $inurl)){
             
             $this->dbmodel->addNewProcess($inurl, $stamp, $this->dbmodel->getUidByUser($this->session->userdata("user")));
+            $data["successmsg"] = "Sikeres hozzáadás!";
             //kinullázzuk, már nem kell
             $data["inurl"] = "";
             $data["runtime"] = "";
@@ -189,8 +190,10 @@ class Main extends CI_Controller {
           if(preg_match("/^http/", $inurl)){
             if(preg_match("/(htm|html|php|asp)$/", $inurl)){
               
-              $data["inurl"] = "";
-              $data["runtime"] = "";
+              $this->dbmodel->updateProcess($id, $inurl, $stamp, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+              $data["successmsg"] = "Sikeres frissítés!";
+              //$data["inurl"] = "";
+              //$data["runtime"] = "";
             }else{
               $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
             }

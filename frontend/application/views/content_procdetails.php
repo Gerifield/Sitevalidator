@@ -6,6 +6,9 @@ else:
   if(isset($errormsg)){
     echo '<div class="errormsg">'.$errormsg.'</div>';
   }
+  if(isset($successmsg)){
+    echo '<div class="successmsg">'.$successmsg.'</div>';
+  }
 ?>
 <form method="post" action="">
 <table class="proc_table" style="width: 100%">
