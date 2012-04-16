@@ -19,8 +19,11 @@ class Main extends CI_Controller {
         if(preg_match("/^http/", $inurl)){
           if(preg_match("/(htm|html|php|asp)$/", $inurl)){
             
+            $this->dbmodel->addNewProcess($inurl, $stamp, $this->dbmodel->getUidByUser($this->session->userdata("user")));
+            //kinullázzuk, már nem kell
             $data["inurl"] = "";
             $data["runtime"] = "";
+            
           }else{
             $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
           }
@@ -209,6 +212,10 @@ class Main extends CI_Controller {
     }else{
       redirect("main/index");
     }
+  }
+  
+  public function delproc($id = false){
+  
   }
 }
 

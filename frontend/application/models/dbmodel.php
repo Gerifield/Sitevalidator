@@ -132,8 +132,8 @@ class Dbmodel extends CI_Model {
       }
     }
     
-    function addNewProcess(){
-      
+    function addNewProcess($url, $runtime, $uid){
+      $this->db->insert("processes", array('token' => sha1($uid.$url.$runtime), 'url' => $url, 'runtime' => $runtime, 'uid' => $uid));
     }
     
     function updateProcess(){
