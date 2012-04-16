@@ -15,11 +15,9 @@ class Main extends CI_Controller {
         if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
         //print "OK";
         //print $stamp." -> ".date("Y-m-d H:i", $stamp);
-        $vegzodes3 = array("htm", "php", "asp");
-        $vegzodes4 = array("html");
         
-        if(preg_match("^http", $inurl)){
-          if(in_array(substr($inurl, -3), $vegzodes3) or in_array(substr($inurl, -4), $vegzodes4)){
+        if(preg_match("/^http/", $inurl)){
+          if(preg_match("/(htm|html|php|asp)$/", $inurl)){
             
             $data["inurl"] = "";
             $data["runtime"] = "";
