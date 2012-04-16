@@ -216,7 +216,8 @@ class Main extends CI_Controller {
   
   public function delproc($id = false){
     if($id && $this->session->userdata('logged_in')){
-      
+      $this->dbmodel->delProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+      redirect("main/index");
     }else{
       redirect("main/index");
     }

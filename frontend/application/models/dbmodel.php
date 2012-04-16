@@ -121,7 +121,7 @@ class Dbmodel extends CI_Model {
       }
       return $result; // Forma: [id => [adatok], id => [adatok]]
     }
-    function getProcessDataById($id, $uid){
+    function getProcessDataById($id, $uid){ //az átadott UID-bõl "tudja", hogy elérhetõ-e
       $this->db->where("id", $id);
       $this->db->where("uid", $uid);
       $q = $this->db->get("processes");
@@ -138,5 +138,9 @@ class Dbmodel extends CI_Model {
     
     function updateProcess(){
       
+    }
+    
+    function delProcess($id, $uid){ //az UID-vel ellenõrizhetõ, hogy a sajátja-e
+      $this->db->delete("processes", array('id' => $id, 'uid' => $uid));
     }
 }
