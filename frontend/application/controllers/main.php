@@ -175,7 +175,7 @@ class Main extends CI_Controller {
   }
   
   public function details($id = false){
-    if($id){
+    if($id && $this->session->userdata('logged_in')){
       $inurl = $this->input->post("inurl", TRUE);
       $data["inurl"] = $inurl;
       $data["runtime"] = $this->input->post("runtime", TRUE);
