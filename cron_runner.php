@@ -12,6 +12,10 @@ if($res = $mysqli->query("SELECT * FROM processes WHERE state = 0 AND runtime < 
   
   while($row = $res->fetch_array()){
     echo $row['id']."<br />";
+    $mysqli->query("UPDATE processes SET state=1 WHERE id = ".$row['id']);
+    
+    //TODO: futtatás megoldani
+    
   }
 }else{
   echo $mysqli->error; //debughoz
