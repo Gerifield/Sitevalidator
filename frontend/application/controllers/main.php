@@ -18,7 +18,7 @@ class Main extends CI_Controller {
         $vegzodes3 = array("htm", "php", "asp");
         $vegzodes4 = array("html");
         
-        if(substr($inurl, 0, 7) == "http://"){
+        if(preg_match("^http", $inurl)){
           if(in_array(substr($inurl, -3), $vegzodes3) or in_array(substr($inurl, -4), $vegzodes4)){
             
             $data["inurl"] = "";
@@ -27,7 +27,7 @@ class Main extends CI_Controller {
             $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
           }
         }else{
-          $data["errormsg"] = "Az URL-nek http://-el kell kezdődnie!.";
+          $data["errormsg"] = "Az URL-nek http-vel kell kezdődnie!.";
         }
       }else{
         $data["errormsg"] = "Rossz dátum formázás.";
