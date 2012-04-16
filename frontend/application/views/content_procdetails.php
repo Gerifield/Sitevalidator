@@ -27,6 +27,7 @@ else:
 <tr><td>CSS figyelmeztetések:</td><td><?php echo $datalist["csswarningnum"]; ?></td></tr>
 </table>
 </form>
+<div style="text-align: center;"><a href="<?php echo site_url("main/delproc/".$datalist["id"]); ?>" onclick="return confirm('Biztosan törölni szeretnéd ezt a bejegyzést?');">Törlés</a></div>
 <?php
 endif;
 ?>
