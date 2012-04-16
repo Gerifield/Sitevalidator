@@ -35,7 +35,7 @@ class Main extends CI_Controller {
         $data["errormsg"] = "Rossz dátum formázás.";
       }
     }
-      $data["datalist"] = $this->dbmodel->getAllProcessDataByUid($this->dbmodel->getUidByUser($this->session->userdata('user')));
+      $data["datalist"] = $this->dbmodel->getShortProcessDataByUid($this->dbmodel->getUidByUser($this->session->userdata('user')));
       $this->load->view('header');
       $this->load->view('menu');
       $this->load->view('content_main', $data);

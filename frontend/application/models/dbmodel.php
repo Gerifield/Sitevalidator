@@ -101,6 +101,7 @@ class Dbmodel extends CI_Model {
     }
     
     function getAllProcessDataByUid($uid){
+      $this->db->order_by("id", "asc"); 
       $this->db->where("uid", $uid);
       $q = $this->db->get("processes");
       $result = array(); // ha üres lenne a lekérés
@@ -112,6 +113,7 @@ class Dbmodel extends CI_Model {
       return $result; // Forma: [id => [adatok], id => [adatok]]
     }
     function getShortProcessDataByUid($uid){
+      $this->db->order_by("id", "asc"); 
       $this->db->where("uid", $uid);
       $q = $this->db->get("processes");
       $result = array(); // ha üres lenne a lekérés
