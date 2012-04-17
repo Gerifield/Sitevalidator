@@ -2,6 +2,8 @@
 define('BASEPATH', ''); //Kell, hogy hozzáférhessen a database.php-hez
 include('frontend/application/config/database.php'); //nem szép, de hatékonyabb!
 
+$callback_url = "http://127.0.0.1/SZAKDOLI/frontend/index.php/bg/index";
+
 $mysqli = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password'], $db['default']['database']);
 
 $time = time() + (5*60); //mennyi ideig nezzen elore a meres (masodpercben)
@@ -15,6 +17,7 @@ if($res = $mysqli->query("SELECT * FROM processes WHERE state = 0 AND runtime < 
     $mysqli->query("UPDATE processes SET state=1 WHERE id = ".$row['id']);
     
     //TODO: futtatás megoldani
+    exec('C:\\Python27\\python.exe validator.py  --callback '.$callback_url.'/'.$row['token'].' '.$row['url'].' > dump.txt &');
     
   }
 }else{

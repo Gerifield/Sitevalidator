@@ -14,7 +14,7 @@ def postResults(cburl, results):
   req = urllib2.Request(cburl, urllib.urlencode({"json-data": json.dumps(results)}) )
   req.add_header("Content-type", "application/x-www-form-urlencoded")
   res = urllib2.urlopen(req)
-  #print res.read()
+  print res.read()
 
 def urlCheck(str):
   check = urlparse(str)

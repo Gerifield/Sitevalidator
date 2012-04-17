@@ -1,0 +1,110 @@
+Talat linkek: 4
+['http://gerifield.hu/index.html', u'http://gerifield.hu/kapcsolat.html', u'http://gerifield.hu/rolam.html', u'http://gerifield.hu/project.html']
+Page:  http://gerifield.hu/index.html
+HTML:  -//W3C//DTD XHTML 1.0 Strict//EN
+Valid, doc:  -//W3C//DTD XHTML 1.0 Strict//EN
+CSS:  css21
+Valid, doc:  css21
+Page:  http://gerifield.hu/kapcsolat.html
+HTML:  -//W3C//DTD XHTML 1.0 Strict//EN
+Valid, doc:  -//W3C//DTD XHTML 1.0 Strict//EN
+CSS:  css21
+Valid, doc:  css21
+Page:  http://gerifield.hu/rolam.html
+HTML:  -//W3C//DTD XHTML 1.0 Strict//EN
+Valid, doc:  -//W3C//DTD XHTML 1.0 Strict//EN
+CSS:  css21
+Valid, doc:  css21
+Page:  http://gerifield.hu/project.html
+HTML:  -//W3C//DTD XHTML 1.0 Strict//EN
+Valid, doc:  -//W3C//DTD XHTML 1.0 Strict//EN
+CSS:  css21
+Valid, doc:  css21
+URL: http://127.0.0.1/SZAKDOLI/frontend/index.php/bg/index/c15ce191a720dae950c4bd986b08c6e44a19ec44
+array(4) {
+  [0]=>
+  array(9) {
+    [0]=>
+    string(30) "http://gerifield.hu/index.html"
+    [1]=>
+    string(32) "-//W3C//DTD XHTML 1.0 Strict//EN"
+    [2]=>
+    bool(true)
+    [3]=>
+    string(1) "0"
+    [4]=>
+    string(1) "0"
+    [5]=>
+    string(5) "css21"
+    [6]=>
+    bool(true)
+    [7]=>
+    string(1) "0"
+    [8]=>
+    string(1) "0"
+  }
+  [1]=>
+  array(9) {
+    [0]=>
+    string(34) "http://gerifield.hu/kapcsolat.html"
+    [1]=>
+    string(32) "-//W3C//DTD XHTML 1.0 Strict//EN"
+    [2]=>
+    bool(true)
+    [3]=>
+    string(1) "0"
+    [4]=>
+    string(1) "0"
+    [5]=>
+    string(5) "css21"
+    [6]=>
+    bool(true)
+    [7]=>
+    string(1) "0"
+    [8]=>
+    string(1) "0"
+  }
+  [2]=>
+  array(9) {
+    [0]=>
+    string(30) "http://gerifield.hu/rolam.html"
+    [1]=>
+    string(32) "-//W3C//DTD XHTML 1.0 Strict//EN"
+    [2]=>
+    bool(true)
+    [3]=>
+    string(1) "0"
+    [4]=>
+    string(1) "0"
+    [5]=>
+    string(5) "css21"
+    [6]=>
+    bool(true)
+    [7]=>
+    string(1) "0"
+    [8]=>
+    string(1) "0"
+  }
+  [3]=>
+  array(9) {
+    [0]=>
+    string(32) "http://gerifield.hu/project.html"
+    [1]=>
+    string(32) "-//W3C//DTD XHTML 1.0 Strict//EN"
+    [2]=>
+    bool(true)
+    [3]=>
+    string(1) "0"
+    [4]=>
+    string(1) "0"
+    [5]=>
+    string(5) "css21"
+    [6]=>
+    bool(true)
+    [7]=>
+    string(1) "0"
+    [8]=>
+    string(1) "0"
+  }
+}
+Success
