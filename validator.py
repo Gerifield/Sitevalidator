@@ -42,6 +42,9 @@ def main():
     pp.setXmlFormat(True) # ha XML kapcsolo is van, akkor ezt jelezzuk az URL gyujtonek
   pp.parsePage()
   
+  print pp.getLinks()
+  
+  """
   if args.format == 'long':
     print "Talat linkek: "+str(len(pp.getLinks()))
     print pp.getLinks()
@@ -76,7 +79,7 @@ def main():
   if args.callback:
     #print "Van callback: ",args.callback
     postResults(args.callback, results)
-    
+  """  
   
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
