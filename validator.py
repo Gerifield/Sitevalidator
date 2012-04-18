@@ -79,9 +79,9 @@ def main():
       cp.start()
       
       if args.format == 'long':
-        print "HTML size:", cp.getHTMLSize()
-        print "CSS size:", cp.getAllCSSsize()
-        print "Javascript size:", cp.getAllJSSize()
+        print "HTML size:", cp.getHTMLSize()/1000, "KB"
+        print "CSS size:", cp.getAllCSSsize()/1000, "KB"
+        print "Javascript size:", cp.getAllJSSize()/1000, "KB"
         print "Image number:", cp.getIMGNum()
       
       
