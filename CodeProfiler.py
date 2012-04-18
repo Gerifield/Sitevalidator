@@ -159,7 +159,7 @@ class CodeProfiler:
 
 
 
-"""
+
 cp = CodeProfiler("http://gerifield.hu/")
 cp.start()
 
@@ -180,4 +180,3 @@ print "CSS:", cp.getCSSLinks()
 print "JS:", cp.getJSLinks()
 print "IMG:", cp.getIMGLinks()
 print "URL:", cp.getURL()
-"""
