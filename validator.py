@@ -71,6 +71,7 @@ def main():
           print "Valid, doc: ", val.getCSSDoctype()
       
       if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
+        #TODO: asszociativva!
         results.append([val.getUrl(), val.getDoctype(), val.isValid(), val.getErrorNum(), val.getWarningNum(),
                         val.getCSSDoctype(), val.isValidCSS(), val.getCSSErrorNum(), val.getCSSWarningNum()])
         # URL, doctype, valid-e, error, warning, csstype, valid-e, error, warning
