@@ -64,7 +64,7 @@ class CodeProfiler:
   
   def start(self):
     
-    #try:
+    try:
       html = urllib2.urlopen(self.url)
       #print "URL:",html.geturl()
       #print "Header:",html.info()
@@ -96,8 +96,15 @@ class CodeProfiler:
       for elem in soup.find_all("link", type="text/css"):
         cssurl = urlparse.urljoin(self.url, elem['href'])
         #print cssurl
-        self.csssize += len(urllib2.urlopen(cssurl).read())
-        self.csslinks.append(cssurl)
+        try:
+          self.csssize += len(urllib2.urlopen(cssurl).read())
+        except urllib2.URLError, ex: #valamilyen hiba
+          if hasattr(ex, 'reason'): #kapcsolodasi
+            self.csslinks.append([ -1, cssurl])
+          elif hasattr(ex, 'code'): #webszerver hiba
+            self.csslinks.append([ex.code, cssurl])
+        else: #minden ok
+          self.csslinks.append(["0", cssurl])
       
       
       
@@ -127,10 +134,13 @@ class CodeProfiler:
 
       
       
-    #except:
-    #  print "Error..."
+    except urllib2.URLError, e:
+      if hasattr(e, 'reason'):
+        print 'Reason: ', e.reason
+      elif hasattr(e, 'code'):
+        print 'Error code: ', e.code
       
-cp = CodeProfiler("http://gerifield.hu")
+cp = CodeProfiler("http://127.0.0.1")
 cp.start()
 
 
