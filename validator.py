@@ -8,6 +8,7 @@ from urlparse import urlparse
 
 import PageParser
 import W3cSoapApi
+import CodeProfiler
 
 def postResults(cburl, results):
   print "URL: "+cburl
@@ -72,10 +73,23 @@ def main():
         else:
           print "Valid, doc: ", val.getCSSDoctype()
       
+      
+      #TODO: esetleg parameterrel legyen kikapcsolhato a profiler
+      cp = CodeProfiler.CodeProfiler(val.getUrl())
+      cp.start()
+      
+      if args.format == 'long':
+        print "HTML size:", cp.getHTMLSize()
+        print "CSS size:", cp.getAllCSSsize()
+        print "Javascript size:", cp.getAllJSSize()
+        print "Image number:", cp.getIMGNum()
+      
+      
       if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
         results.append({'code': link[0], 'url': val.getUrl(),
         'htmldoctype': val.getDoctype(), 'htmlvalidity': val.isValid(), 'htmlerrornum': val.getErrorNum(), 'htmlwarningnum': val.getWarningNum(),
-        'cssdoctype': val.getCSSDoctype(), 'cssvalidity': val.isValidCSS(), 'csserrornum': val.getCSSErrorNum(), 'csswarningnum': val.getCSSWarningNum()})
+        'cssdoctype': val.getCSSDoctype(), 'cssvalidity': val.isValidCSS(), 'csserrornum': val.getCSSErrorNum(), 'csswarningnum': val.getCSSWarningNum(),
+        'htmlsize': cp.getHTMLSize(), 'fullcsssize': cp.getAllCSSsize(), 'fulljssize': cp.getAllJSSize(), 'imgnum': cp.getIMGNum() })
         # URL, doctype, valid-e, error, warning, csstype, valid-e, error, warning
       #print "."
       time.sleep(1) #legalabb 1 sec kell
@@ -85,8 +99,6 @@ def main():
       results.append({'code': link[0], 'url': link[1] })
       
 
-  
-  
   
   
   if args.callback:

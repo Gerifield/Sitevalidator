@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
     	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <title>Gerifield - Főoldal</title>
+        <title>Gerifield - Projektek</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script type = "text/javascript" src="jquery.min.js" ></script>
         <script type = "text/javascript">
@@ -22,25 +22,76 @@
         <div class="main_page">
             <div class="page_logo">
               <img src="logo.jpg" alt="Logo" />
-            </div>
+            </div> 
             <div class="menu">
-                <a class="menu_button_sel" href="index.html">Főoldal</a>
-                <a class="menu_button" href="project.html">Projektek</a>
+                <a class="menu_button" href="index.html">Főoldal</a>
+                <a class="menu_button_sel" href="project.html">Projektek</a>
                 <a class="menu_button" href="rolam.html">Rólam</a>
                 <a class="menu_button" href="kapcsolat.html">Kapcsolat</a>
                 <a class="menu_button" href="http://blog.gerifield.hu">Microblog</a>
             </div>
             
             <div class="content">
-              <p>
-                Üdv az oldalamon! :)<br />
-                Végre már egy saját készítésű (nem éppen) remekkel gondoltam előrukkolni...
-                Nem szeretem a kész cuccokat, csak sajnos nincs igazán jó grafikai ötletem, de ez nem tántorított el, hogy megalkossem ezt az "izét" most itt.
-                <br />
-                <br />
-                Jó szórakozást hozzá, igyekszem sok mindent felpakolni, de lehet kap egy kicsi php-s motort is a cucc, mert lusta vagyok szerkesztgetni mindent kézzel.
-              </p>
-              <div class="sign">Gerifield</div>
+              <h1>
+                Microblog
+              </h1>
+              Talán ide illik a mictoblogom is, mint "projekt", ez
+              igazából egy CodeIgniter frameworkre épülő kis cucc, ami
+              még koránt sincs kész... :)
+              <br />A fejlesztés alatt a validságot
+              elsődlegesen tartom szem előtt, méghozzá XHTML 1.0
+              <b>Strict</b> szabály szerint.
+              <br />Pár kis "feature" ami eddig
+              megvan: - adatbázis a loginhez (természetesen titkosított
+              jelszó stb...) - egyedi URL, amin keresztül lehet külső
+              forrásból is postolni (egyfajta "token", ami fogadja a
+              megfelelő postolásokat) - minimalista, egyszerűen
+              kezelhető, div-es "design" (valami grafika azért kellne)
+              <br />
+              <br />
+              TODO:
+              <ul>
+              <li>regisztrálás</li>
+              <li>adat módosítás</li>
+              <li>jobb design</li>
+              <li>a listázásnál több adat (tárolva van, csak kiírva nem)</li>
+              <li>oldalakra tördelés sok postnál</li>
+              <li>esetleg felhasználóra keresés (saját postok keresése)</li>
+              <li>adatbázis "javítás" (most user nevet tárol le a postokhoz, nem id-t...)</li>
+              <li>mostani token-es cucc helyett egy megbízhatóbb oauth vagy valami hasonló nem ártana</li>
+              <li>etc.</li>
+              </ul>
+              <hr />
+              <h1>
+                NAS Stat
+              </h1>
+              Az egyik torrent oldalra készítettem egy profilba
+              tehető képet, ami a NAS-em pillanatnyi állapotát (10
+              másodperces eltéréssel, a terhelés elkerülése miatt)
+              mutatja.<br />
+              A transmission nevű kliensből tudja RPC-vel
+              kihámozni az infókat. (Lehet RPC-n át MINDENT kezelni, de
+              ez csak pár alap infót szed le.) A kódot kérésre ki tudom
+              adni....
+              <br /><br />
+              Sajnos az itteni szerveren letiltottk a kimenő kapcsolatot a 9091-es portra és lusta voltam
+              eddig orvosolni ezt a problémát. (Na meg közrejátszik a NAS gyári kezelőfelülete, ami miatt
+              nem olyan könnyű a 80as portot használni a 9091 helyett....)
+              <hr />
+              <h1>
+                Codebin
+              </h1>
+              Coming soon...
+              <hr />
+              <h1>Wifi auto</h1>
+              Mobil alkalmazások fejleszése tárgyhoz készül ez a projekt, a célje, hogy megalkossunk egy
+              olyan rendszert, ami 2 androidos mobiltelefon segítségével teszi lehetővé egy automodell irányítását.
+              <br /><br />
+              Az egyik készüléken fut az irányító program, a másik eszköz a járműre kerül, ennek eredménye képpen kamera képet és
+              sok értékes szenzor adatot nyerhetünk könnyedén.
+              <br />
+              A projekt jelenlegi állása, folyamatosan frissülve, felkerül ide: <a href=
+        "http://gm.gerifield.hu/viewtopic.php?f=10&amp;t=516">http://gm.gerifield.hu/viewtopic.php?f=10&amp;t=516</a>
             </div>
             
             <div class="footer">
