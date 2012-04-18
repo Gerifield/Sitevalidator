@@ -69,13 +69,13 @@ class CodeProfiler:
   def start(self):
     
     try:
-      html = urllib2.urlopen(self.url)
+      resp = urllib2.urlopen(self.url)
       #print "URL:",html.geturl()
-      self.url = html.geturl() #az atiranyitasokat is koveti
+      self.url = resp.geturl() #az atiranyitasokat is koveti
       
       #print "Header:",html.info()
       #print "TEST:",html.info().gettype()
-      html = html.read()
+      html = resp.read()
       #soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
       soup = BeautifulSoup(html)
       #print html
@@ -103,14 +103,15 @@ class CodeProfiler:
         cssurl = urlparse.urljoin(self.url, elem['href'])
         #print cssurl
         try:
-          self.csssize += len(urllib2.urlopen(cssurl).read())
+          resp = urllib2.urlopen(cssurl)
+          self.csssize += len(resp.read())
         except urllib2.URLError, ex: #valamilyen hiba
           if hasattr(ex, 'reason'): #kapcsolodasi
             self.csslinks.append([ -1, cssurl])
           elif hasattr(ex, 'code'): #webszerver hiba
             self.csslinks.append([ ex.code, cssurl])
         else: #minden ok
-          self.csslinks.append([ 0, cssurl])
+          self.csslinks.append([ resp.getcode(), cssurl])
       
       
       
@@ -129,14 +130,15 @@ class CodeProfiler:
         jsurl = urlparse.urljoin(self.url, elem['src'])
         #print jsurl
         try:
-          self.jssize += len(urllib2.urlopen(jsurl).read())
+          resp = urllib2.urlopen(jsurl)
+          self.jssize += len(resp.read())
         except urllib2.URLError, ex:
           if hasattr(ex, 'reason'):
             self.jslinks.append([ -1, jsurl])
           elif hasattr(ex, 'code'):
             self.jslinks.append([ ex.code, jsurl])
         else:
-          self.jslinks.append([ 0, jsurl])
+          self.jslinks.append([ resp.getcode(), jsurl])
         
         
       #IMG tag szamolas:  
@@ -155,11 +157,11 @@ class CodeProfiler:
         #print 'Error code: ', e.code
         self.urlcode = e.code
     else:
-      self.urlcode = 0
+      self.urlcode = resp.getcode()
 
 
 
-
+"""
 cp = CodeProfiler("http://gerifield.hu/")
 cp.start()
 
@@ -180,3 +182,4 @@ print "CSS:", cp.getCSSLinks()
 print "JS:", cp.getJSLinks()
 print "IMG:", cp.getIMGLinks()
 print "URL:", cp.getURL()
+"""
