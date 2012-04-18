@@ -80,7 +80,7 @@ class CodeProfiler:
       soup = BeautifulSoup(html)
       #print html
       #print soup.html
-      open("dump.txt", "w").write(html)
+      #open("dump.txt", "w").write(html)
       
       #print "Karakterek:", len(html) #Content-Length is ennyi!
       self.htmlsize = len(html)
