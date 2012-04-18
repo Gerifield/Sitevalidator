@@ -44,7 +44,7 @@ class CodeProfiler:
   def getInJSSize(self): #inline javascript meret
     return self.injssize
     
-  def getJSsize(self): #kulso js meretek
+  def getJSSize(self): #kulso js meretek
     return self.jssize
   
   def getAllJSSize(self): #teljes js meret
@@ -66,27 +66,27 @@ class CodeProfiler:
     
     #try:
       html = urllib2.urlopen(self.url)
-      print "URL:",html.geturl()
-      print "Header:",html.info()
-      print "TEST:",html.info().gettype()
+      #print "URL:",html.geturl()
+      #print "Header:",html.info()
+      #print "TEST:",html.info().gettype()
       html = html.read()
       #soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
       soup = BeautifulSoup(html)
       #print html
-      print soup.html
+      #print soup.html
       open("dump.txt", "w").write(html)
       
-      print "Karakterek:", len(html) #Content-Length is ennyi!
+      #print "Karakterek:", len(html) #Content-Length is ennyi!
       self.htmlsize = len(html)
       self.fullhtmlsize = len(html)
       
       #CSS kereses:
       for elem in soup.find_all(style=True): #barmi ami style-t tartalmaz:
-        print elem['style'] + " -> " + str(len(elem['style']))
+        #print elem['style'] + " -> " + str(len(elem['style']))
         self.incsssize += len(elem['style'])
         #inline csss size
       for elem in soup.find_all("style"):
-        print elem.string + " -> " + str(len(elem.string))
+        #print elem.string + " -> " + str(len(elem.string))
         self.incsssize += len(elem.string)
       
       #INLINE CSS-t kivonjuk a html méretből!
@@ -95,7 +95,7 @@ class CodeProfiler:
       #kulso css meresek
       for elem in soup.find_all("link", type="text/css"):
         cssurl = urlparse.urljoin(self.url, elem['href'])
-        print cssurl
+        #print cssurl
         self.csssize += len(urllib2.urlopen(cssurl).read())
         self.csslinks.append(cssurl)
       
@@ -105,16 +105,16 @@ class CodeProfiler:
       for elem in soup.find_all("script", type="text/javascript"):
         #if hasattr(elem, 'string'): #lehet üres is!
         if elem.string:
-          print elem.string + " -> " + str(len(elem.string))
+          #print elem.string + " -> " + str(len(elem.string))
           self.injssize += len(elem.string)
       #INLINE JS-t kivonjuk a html méretből!
       self.htmlsize -= self.injssize
       
       #kulso js meresek
       for elem in soup.find_all("script", type="text/javascript", src=True):
-        print elem['src']
+        #print elem['src']
         jsurl = urlparse.urljoin(self.url, elem['src'])
-        print jsurl
+        #print jsurl
         self.jssize += len(urllib2.urlopen(jsurl).read())
         self.jslinks.append(jsurl)
         
@@ -124,23 +124,7 @@ class CodeProfiler:
         imgurl = urlparse.urljoin(self.url, elem['src'])
         self.imgtagnum += 1
         self.imglinks.append(imgurl)
-        
-        
-      print "HTML:", self.htmlsize
-      print "inCSS:", self.incsssize
-      print "inJS:", self.injssize
-      print "CHECK:"
-      print "FULL:", self.fullhtmlsize
-      print "SUM:", self.htmlsize+self.incsssize+self.injssize
-      print ""
-      print "Kulso CSS:", self.csssize
-      print "Kulso JS:", self.jssize
-      print ""
-      print "Kepek: ", self.imgtagnum
-      print "\n"
-      print "CSS:", self.csslinks
-      print "JS:", self.jslinks
-      print "IMG:", self.imglinks
+
       
       
     #except:
@@ -148,3 +132,20 @@ class CodeProfiler:
       
 cp = CodeProfiler("http://gerifield.hu")
 cp.start()
+
+
+print "HTML:", cp.getHTMLSize()
+print "inCSS:", cp.getInCSSSize()
+print "inJS:", cp.getInJSSize()
+print "CHECK:"
+print "FULL:", cp.getFullHTMLSize()
+#print "SUM:", self.htmlsize+self.incsssize+self.injssize
+print ""
+print "Kulso CSS:", cp.getCSSSize()
+print "Kulso JS:", cp.getJSSize()
+print ""
+print "Kepek: ", cp.getIMGNum()
+print "\n"
+print "CSS:", cp.getCSSLinks()
+print "JS:", cp.getJSLinks()
+print "IMG:", cp.getIMGLinks()
