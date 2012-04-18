@@ -42,9 +42,9 @@ def main():
     pp.setXmlFormat(True) # ha XML kapcsolo is van, akkor ezt jelezzuk az URL gyujtonek
   pp.parsePage()
   
-  print pp.getLinks()
+  #print pp.getLinks()
   
-  """
+  
   if args.format == 'long':
     print "Talat linkek: "+str(len(pp.getLinks()))
     print pp.getLinks()
@@ -52,34 +52,39 @@ def main():
   val = W3cSoapApi.W3cSoapApi()
 
   for i in range(len(pp.getLinks())):
-    val.setUrl(pp.getLinks()[i])
-    val.parseAll()
-    if args.format == 'long':
-      print "Page: ", val.getUrl()
-      print "HTML: ", val.getDoctype()
-      if not val.isValid():
-        print "Error: ", val.getErrorNum()
-        print "Warning: ", val.getWarningNum()
-      else:
-        print "Valid, doc: ", val.getDoctype()
-      print "CSS: ", val.getCSSDoctype()
-      if not val.isValidCSS():
-        print "Error: ", val.getCSSErrorNum()
-        print "Warning: ", val.getCSSWarningNum()
-      else:
-        print "Valid, doc: ", val.getCSSDoctype()
+    if pp.getLinks()[i][0] == 200: #ha jo az url, csak akkor validaltatjuk
+      val.setUrl(pp.getLinks()[i][1])
+      val.parseAll()
+      if args.format == 'long':
+        print "Page: ", val.getUrl()
+        print "HTML: ", val.getDoctype()
+        if not val.isValid():
+          print "Error: ", val.getErrorNum()
+          print "Warning: ", val.getWarningNum()
+        else:
+          print "Valid, doc: ", val.getDoctype()
+        print "CSS: ", val.getCSSDoctype()
+        if not val.isValidCSS():
+          print "Error: ", val.getCSSErrorNum()
+          print "Warning: ", val.getCSSWarningNum()
+        else:
+          print "Valid, doc: ", val.getCSSDoctype()
+      
+      if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
+        results.append([val.getUrl(), val.getDoctype(), val.isValid(), val.getErrorNum(), val.getWarningNum(),
+                        val.getCSSDoctype(), val.isValidCSS(), val.getCSSErrorNum(), val.getCSSWarningNum()])
+        # URL, doctype, valid-e, error, warning, csstype, valid-e, error, warning
+      #print "."
+      time.sleep(1) #legalabb 1 sec kell
     
-    if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
-      results.append([val.getUrl(), val.getDoctype(), val.isValid(), val.getErrorNum(), val.getWarningNum(),
-                      val.getCSSDoctype(), val.isValidCSS(), val.getCSSErrorNum(), val.getCSSWarningNum()])
-      # URL, doctype, valid-e, error, warning, csstype, valid-e, error, warning
-    #print "."
-    time.sleep(1) #legalabb 1 sec kell
-
+    else: #HA a link nem 200-as kodot adott vissza
+      print "Nem 200-as...."
+      
+    
   if args.callback:
     #print "Van callback: ",args.callback
     postResults(args.callback, results)
-  """  
+    
   
   #churl = "http://people.inf.elte.hu/vzoli" #web URL
   #req = urllib2.Request("http://validator.w3.org/check?uri="+churl+"&output=soap12") #validation...
