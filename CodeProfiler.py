@@ -108,5 +108,5 @@ class CodeProfiler:
     #except:
     #  print "Error..."
       
-pf = PerformanceTester("http://gerifield.hu")
-pf.startTest()
+cp = CodeProfiler("http://gerifield.hu")
+cp.start()
