@@ -23,6 +23,44 @@ class CodeProfiler:
   def __init__(self, url):
     self.url = url
   
+  def getFullHTMLSize(self): #teljes html oldal merete
+    return self.fullhtmlsize
+  
+  def getHTMLSize(self): #oldal meret minusz inline html es js kodok
+    return self.htmlsize
+  
+  def getInCSSSize(self): #inline css kod
+    return self.incsssize
+  
+  def getCSSSize(self):   #kulso css-ek merete
+    return self.csssize
+  
+  def getAllCSSsize(self):  #osszes css meret
+    return self.csssize + self.incsssize
+   
+  def getCSSLinks(self): #css linkek
+    return self.csslinks
+  
+  def getInJSSize(self): #inline javascript meret
+    return self.injssize
+    
+  def getJSsize(self): #kulso js meretek
+    return self.jssize
+  
+  def getAllJSSize(self): #teljes js meret
+    return self.injssize + self.jssize
+    
+  def getJSLinks(self): #js linkek
+    return self.jslinks
+    
+  def getIMGNum(self): #linkelt kepek (<img> tegek szama)
+    return self.imgtagnum
+    
+  def getIMGLinks(self): #keplinkek
+    return self.imglinks
+    
+    
+    
   
   def start(self):
     
