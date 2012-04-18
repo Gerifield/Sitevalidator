@@ -11,10 +11,12 @@ import W3cSoapApi
 
 def postResults(cburl, results):
   print "URL: "+cburl
+  print json.dumps(results)
+  """
   req = urllib2.Request(cburl, urllib.urlencode({"json-data": json.dumps(results)}) )
   req.add_header("Content-type", "application/x-www-form-urlencoded")
   res = urllib2.urlopen(req)
-  print res.read()
+  print res.read()"""
 
 def urlCheck(str):
   check = urlparse(str)
@@ -51,9 +53,9 @@ def main():
  
   val = W3cSoapApi.W3cSoapApi()
 
-  for i in range(len(pp.getLinks())):
-    if pp.getLinks()[i][0] == 200: #ha jo az url, csak akkor validaltatjuk
-      val.setUrl(pp.getLinks()[i][1])
+  for link in pp.getLinks():
+    if link[0] == 200: #ha jo az url, csak akkor validaltatjuk
+      val.setUrl(link[1])
       val.parseAll()
       if args.format == 'long':
         print "Page: ", val.getUrl()
@@ -71,17 +73,22 @@ def main():
           print "Valid, doc: ", val.getCSSDoctype()
       
       if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
-        #TODO: asszociativva!
-        results.append([val.getUrl(), val.getDoctype(), val.isValid(), val.getErrorNum(), val.getWarningNum(),
-                        val.getCSSDoctype(), val.isValidCSS(), val.getCSSErrorNum(), val.getCSSWarningNum()])
+        results.append({'code': link[0], 'url': val.getUrl(),
+        'htmldoctype': val.getDoctype(), 'htmlvalidity': val.isValid(), 'htmlerrornum': val.getErrorNum(), 'htmlwarningnum': val.getWarningNum(),
+        'cssdoctype': val.getCSSDoctype(), 'cssvalidity': val.isValidCSS(), 'csserrornum': val.getCSSErrorNum(), 'csswarningnum': val.getCSSWarningNum()})
         # URL, doctype, valid-e, error, warning, csstype, valid-e, error, warning
       #print "."
       time.sleep(1) #legalabb 1 sec kell
     
     else: #HA a link nem 200-as kodot adott vissza
-      print "Nem 200-as...."
+      #print "Nem 200-as...."
+      results.append({'code': link[0], 'url': link[1] })
       
-    
+
+  
+  
+  
+  
   if args.callback:
     #print "Van callback: ",args.callback
     postResults(args.callback, results)
