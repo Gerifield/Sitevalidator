@@ -9,32 +9,35 @@ class Main extends CI_Controller {
       $inurl = $this->input->post("inurl", TRUE);
       $data["inurl"] = $inurl;
       $data["runtime"] = $this->input->post("runtime", TRUE);
-      if($inurl){
-        //TODO kódolás
-        $stamp = strtotime($this->input->post("runtime", TRUE));
-        if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
-        //print "OK";
-        //print $stamp." -> ".date("Y-m-d H:i", $stamp);
-        
-        if(preg_match("/^http/", $inurl)){
-          if(preg_match("/(htm|html|php|asp)$/", $inurl)){
-            
-            $this->dbmodel->addNewProcess($inurl, $stamp, $this->dbmodel->getUidByUser($this->session->userdata("user")));
-            $data["successmsg"] = "Sikeres hozzáadás!";
-            //kinullázzuk, már nem kell
-            $data["inurl"] = "";
-            $data["runtime"] = "";
-            
+      if($this->input->post("sendform", TRUE)){
+        if($inurl){
+          //TODO kódolás
+          $stamp = strtotime($this->input->post("runtime", TRUE));
+          if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
+          //print "OK";
+          //print $stamp." -> ".date("Y-m-d H:i", $stamp);
+            if(preg_match("/^http/", $inurl)){
+              if(preg_match("/(htm|html|php|asp)$/", $inurl)){
+                
+                $this->dbmodel->addNewProcess($inurl, $stamp, $this->dbmodel->getUidByUser($this->session->userdata("user")));
+                $data["successmsg"] = "Sikeres hozzáadás!";
+                //kinullázzuk, már nem kell
+                $data["inurl"] = "";
+                $data["runtime"] = "";
+                
+              }else{
+                $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
+              }
+            }else{
+              $data["errormsg"] = "Az URL-nek http-vel kell kezdődnie!.";
+            }
           }else{
-            $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
+            $data["errormsg"] = "Rossz dátum formázás.";
           }
         }else{
-          $data["errormsg"] = "Az URL-nek http-vel kell kezdődnie!.";
+          $data["errormsg"] = "Ki kell tölteni az URL mezőt!";
         }
-      }else{
-        $data["errormsg"] = "Rossz dátum formázás.";
       }
-    }
       $data["datalist"] = $this->dbmodel->getShortProcessDataByUid($this->dbmodel->getUidByUser($this->session->userdata('user')));
       $this->load->view('header');
       $this->load->view('menu');

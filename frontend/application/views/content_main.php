@@ -7,7 +7,8 @@ if(isset($successmsg)){
 }
 ?>
 <form method="post" action="">
-<p>URL*: <input type="text" name="inurl" value="<?php echo $inurl; ?>" size="70" /> Időpont: <input type="text" name="runtime" value="<?php echo $runtime; ?>" /><input type="submit" value="Hozzáad" />
+<p>URL*: <input type="text" name="inurl" value="<?php echo $inurl; ?>" size="70" /> Időpont: <input type="text" name="runtime" value="<?php echo $runtime; ?>" />
+<input type="hidden" name="sendform" value="true" /><input type="submit" value="Hozzáad" />
 <br /></p><div style="font-size:85%">*:Teljes url cím, http-vel és .htm, .html, .php vagy .asp végződéssel!</div>
 </form>
 <br />
