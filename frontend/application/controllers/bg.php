@@ -19,10 +19,15 @@ class Bg extends CI_Controller {
     
       $json = json_decode(stripslashes($_POST["json-data"]));
       var_dump($json);
-      $this->dbmodel->updateProcessResults($token, array( 'state' => 2,
-      'htmldoctype' => $json[0][1], 'htmlvalidity' => $json[0][2], 'htmlerrornum' => $json[0][3], 'htmlwarningnum' => $json[0][4],
+      $this->dbmodel->updateProcessResults($token, array( 'state' => 2, 'runtime' => time()));
+      //TODO: eddig mar validalt a processzhez tartozo oldalakat torolni
+      
+      
+      /*
+      array('htmldoctype' => $json[0][1], 'htmlvalidity' => $json[0][2], 'htmlerrornum' => $json[0][3], 'htmlwarningnum' => $json[0][4],
       'cssdoctype' => $json[0][5], 'cssvalidity' => $json[0][6], 'csserrornum' => $json[0][7], 'csswarningnum' => $json[0][8]));
       echo "Success";
+      */
     }
   }
 

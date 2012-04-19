@@ -190,7 +190,8 @@ class Main extends CI_Controller {
           if(preg_match("/^http/", $inurl)){
             if(preg_match("/(htm|html|php|asp)$/", $inurl)){
               
-              $this->dbmodel->updateProcess($id, $inurl, $stamp, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+              $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
+              array('url' => $inurl, 'runtime' => $stamp));
               $data["successmsg"] = "Sikeres frissítés!";
               //$data["inurl"] = "";
               //$data["runtime"] = "";
@@ -206,6 +207,8 @@ class Main extends CI_Controller {
       }
 
       $data["datalist"] = $this->dbmodel->getProcessDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+      $data["pages"] = $this->dbmodel->getPageDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+      
       $this->load->view('header');
       $this->load->view('menu');
       $this->load->view('content_procdetails', $data);

@@ -100,26 +100,14 @@ class Dbmodel extends CI_Model {
       return $ret["user"];
     }
     
-    function getAllProcessDataByUid($uid){
-      $this->db->order_by("id", "asc"); 
-      $this->db->where("uid", $uid);
-      $q = $this->db->get("processes");
-      $result = array(); // ha üres lenne a lekérés
-      foreach($q->result_array() as $row){
-        array_push( $result, array('id' => $row['id'], 'url' => $row['url'], 'state' => $row['state'], 'runtime' => $row['runtime'],
-        'htmlvalidity' => $row['htmlvalidity'], 'htmldoctype' => $row['htmldoctype'], 'htmlerrornum' => $row['htmlerrornum'], 'htmlwarningnum' => $row['htmlwarningnum'],
-        'cssvalidity' => $row['cssvalidity'], 'cssdoctype' => $row['cssdoctype'], 'csserrornum' => $row['csserrornum'], 'csswarningnum' => $row['csswarningnum']) );
-      }
-      return $result; // Forma: [id => [adatok], id => [adatok]]
-    }
     function getShortProcessDataByUid($uid){
       $this->db->order_by("id", "asc"); 
       $this->db->where("uid", $uid);
       $q = $this->db->get("processes");
       $result = array(); // ha üres lenne a lekérés
       foreach($q->result_array() as $row){
-        array_push( $result, array('id' => $row['id'], 'url' => $row['url'], 'state' => $row['state'], 'runtime' => $row['runtime'],
-        'htmlvalidity' => $row['htmlvalidity'], 'cssvalidity' => $row['cssvalidity']));
+        array_push( $result, array('id' => $row['id'], 'url' => $row['url'], 'state' => $row['state'],
+        'runtime' => $row['runtime'], 'starttime' => $row['starttime'], 'htmlvalidity' => $row['htmlvalidity'], 'cssvalidity' => $row['cssvalidity']));
       }
       return $result; // Forma: [id => [adatok], id => [adatok]]
     }
@@ -138,18 +126,47 @@ class Dbmodel extends CI_Model {
       $this->db->insert("processes", array('token' => sha1($uid.$url.rand()), 'url' => $url, 'runtime' => $runtime, 'uid' => $uid));
     }
     
-    function updateProcess($id, $url, $runtime, $uid){ //UID-vel is azonosít, csak sajátot írhat felül
+    function updateProcess($id, $uid, $params){ //UID-vel is azonosít, csak sajátot írhat felül
       $this->db->where("id", $id);
       $this->db->where("uid", $uid);
-      $this->db->update("processes", array('url' => $url, 'runtime' => $runtime));
+      $this->db->update("processes", $params );
+      //array('url' => $url, 'runtime' => $runtime));
     }
     
     function delProcess($id, $uid){ //az UID-vel ellenõrizhetõ, hogy a sajátja-e
+      $this->db->delete("page_data", array('pid' => $id, 'uid' => $uid)); //azért, hogy csak a saját pid-û bejegyzést tudja csak törölni
       $this->db->delete("processes", array('id' => $id, 'uid' => $uid));
     }
     
     function updateProcessResults($token, $resultArray){
       $this->db->where("token", $token);
       $this->db->update("processes", $resultArray);
+    }
+    
+    function getProcIdByToken($token){
+      $this->db->where("token", $token);
+      $q = $this->db->get("processes");
+      $ret = $q->row_array();
+      return $ret["id"];
+    }
+    
+    function addPageData($pid, $uid, $data){
+      
+    }
+    function delPageData($pid, $uid){
+      
+    }
+    
+    function getPageDataById($pid, $uid){
+      $this->db->where("pid", $pid);
+      $this->db->where("uid", $uid);
+      $q = $this->db->get("page_data");
+      $result = array(); // ha üres lenne a lekérés
+      foreach($q->result_array() as $row){
+        array_push( $result, array('pid' => $row['pid'], 'uid' => $row['uid'], 'url' => $row['url'], 'runtime' => $row['runtime'],
+        'htmlvalidity' => $row['htmlvalidity'], 'htmldoctype' => $row['htmldoctype'], 'htmlerrornum' => $row['htmlerrornum'], 'htmlwarningnum' => $row['htmlwarningnum'],
+        'cssvalidity' => $row['cssvalidity'], 'cssdoctype' => $row['cssdoctype'], 'csserrornum' => $row['csserrornum'], 'csswarningnum' => $row['csswarningnum'] ));
+      }
+      return $result;
     }
 }

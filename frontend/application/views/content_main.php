@@ -19,6 +19,7 @@ if(isset($successmsg)){
 <th>Állapot</th>
 <th>HTML Validitás</th>
 <th>CSS Validitás</th>
+<th>Teszt lefutott</th>
 </tr>
 <?php
   foreach($datalist as $row):
@@ -30,6 +31,7 @@ if(isset($successmsg)){
 <td><?php if($row['state'] == 0){echo "Várakozik"; }elseif($row['state'] == 1){ echo "Futtatás..."; }elseif($row['state'] == 2){ echo "Kész"; } ?></td>
 <td><?php if($row["htmlvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
 <td><?php if($row["cssvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
+<td><?php if($row['starttime'] == 0){ echo "-"; }else{ echo date("Y-m-d H:i", $row['starttime']);} ?></td>
 </tr>
 <?php
   endforeach;
