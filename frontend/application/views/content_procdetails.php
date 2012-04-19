@@ -12,7 +12,9 @@ else:
 ?>
 <form method="post" action="">
 <input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" />
-<input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" /> <input type="submit" value="Módosítás" />
+<input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" />
+<input type="hidden" name="sendform" value="true" />
+<input type="submit" value="Módosítás" />
 </form>
 <?php
 
