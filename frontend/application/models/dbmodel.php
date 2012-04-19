@@ -106,8 +106,10 @@ class Dbmodel extends CI_Model {
       $q = $this->db->get("processes");
       $result = array(); // ha üres lenne a lekérés
       foreach($q->result_array() as $row){
-        array_push( $result, array('id' => $row['id'], 'url' => $row['url'], 'state' => $row['state'],
-        'runtime' => $row['runtime'], 'starttime' => $row['starttime'], 'htmlvalidity' => $row['htmlvalidity'], 'cssvalidity' => $row['cssvalidity']));
+        //Bár látványosabb, de tök fölösleges....
+        //array_push( $result, array('id' => $row['id'], 'url' => $row['url'], 'state' => $row['state'],
+        //'runtime' => $row['runtime'], 'starttime' => $row['starttime'], 'htmlvalidity' => $row['htmlvalidity'], 'cssvalidity' => $row['cssvalidity']));
+        array_push($result, $row);
       }
       return $result; // Forma: [id => [adatok], id => [adatok]]
     }
@@ -163,9 +165,10 @@ class Dbmodel extends CI_Model {
       $q = $this->db->get("page_data");
       $result = array(); // ha üres lenne a lekérés
       foreach($q->result_array() as $row){
-        array_push( $result, array('pid' => $row['pid'], 'uid' => $row['uid'], 'url' => $row['url'], 'runtime' => $row['runtime'],
-        'htmlvalidity' => $row['htmlvalidity'], 'htmldoctype' => $row['htmldoctype'], 'htmlerrornum' => $row['htmlerrornum'], 'htmlwarningnum' => $row['htmlwarningnum'],
-        'cssvalidity' => $row['cssvalidity'], 'cssdoctype' => $row['cssdoctype'], 'csserrornum' => $row['csserrornum'], 'csswarningnum' => $row['csswarningnum'] ));
+        //array_push( $result, array('pid' => $row['pid'], 'uid' => $row['uid'], 'url' => $row['url'], 'code' => $row['code'], 'runtime' => $row['runtime'],
+        //'htmlvalidity' => $row['htmlvalidity'], 'htmldoctype' => $row['htmldoctype'], 'htmlerrornum' => $row['htmlerrornum'], 'htmlwarningnum' => $row['htmlwarningnum'],
+        //'cssvalidity' => $row['cssvalidity'], 'cssdoctype' => $row['cssdoctype'], 'csserrornum' => $row['csserrornum'], 'csswarningnum' => $row['csswarningnum'] ));
+        array_push( $result, $row);
       }
       return $result;
     }

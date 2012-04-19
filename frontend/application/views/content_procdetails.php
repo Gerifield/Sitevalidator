@@ -24,6 +24,7 @@ foreach($pages as $row):
 
 <tr><td>URL:</td><td><?php echo $row["url"]; ?></td></tr>
 <tr><td>Futtatás ideje:</td><td><?php if($row["starttime"] == 0){ echo "-"; }else{ echo date("Y-m-d H:i", $row["starttime"]); }?></td></tr>
+<tr><td>HTTP válaszkód:</td><td><?php echo $row["code"]; ?></td></tr>
 
 <tr><td>HTML Validitás:</td><td><?php if($row["htmlvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td></tr>
 <tr><td>HTML Doctype:</td><td><?php if(!empty($row["htmldoctype"])){ echo $row["htmldoctype"]; }else{ echo "Ismeretlen"; } ?></td></tr>
@@ -34,6 +35,11 @@ foreach($pages as $row):
 <tr><td>CSS Doctype:</td><td><?php if(!empty($row["cssdoctype"])){ echo $row["cssdoctype"]; }else{ echo "Ismeretlen"; } ?></td></tr>
 <tr><td>CSS hibák:</td><td><?php echo $row["csserrornum"]; ?></td></tr>
 <tr><td>CSS figyelmeztetések:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+
+<tr><td>HTML méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+<tr><td>CSS méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+<tr><td>Javascript méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+<tr><td>Képek száma:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
 </table>
 
 <?php
