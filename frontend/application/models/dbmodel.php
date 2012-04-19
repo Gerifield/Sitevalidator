@@ -157,12 +157,12 @@ class Dbmodel extends CI_Model {
       return $q->row_array();
     }
     
-    function addPageData($pid, $uid, $data){
+    function addPageData($data){
       $this->db->insert("page_data", $data);
     }
     
     function delPageData($pid, $uid){
-      $this->db->delete("page_data", array('pid' => $id, 'uid' => $uid));
+      $this->db->delete("page_data", array('pid' => $pid, 'uid' => $uid));
     }
     
     function getPageDataById($pid, $uid){

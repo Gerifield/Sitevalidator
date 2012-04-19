@@ -23,7 +23,7 @@ foreach($pages as $row):
 <table class="proc_table" style="width: 100%">
 
 <tr><td>URL:</td><td><?php echo $row["url"]; ?></td></tr>
-<tr><td>Futtatás ideje:</td><td><?php if($row["starttime"] == 0){ echo "-"; }else{ echo date("Y-m-d H:i", $row["starttime"]); }?></td></tr>
+<tr><td>Futtatás ideje:</td><td><?php if($row["runtime"] == 0){ echo "-"; }else{ echo date("Y-m-d H:i", $row["runtime"]); }?></td></tr>
 <tr><td>HTTP válaszkód:</td><td><?php echo $row["code"]; ?></td></tr>
 
 <tr><td>HTML Validitás:</td><td><?php if($row["htmlvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td></tr>
