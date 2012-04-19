@@ -151,12 +151,18 @@ class Dbmodel extends CI_Model {
       $ret = $q->row_array();
       return $ret["id"];
     }
+    function getProcDataByToken($token){
+      $this->db->where("token", $token);
+      $q = $this->db->get("processes");
+      return $q->row_array();
+    }
     
     function addPageData($pid, $uid, $data){
-      
+      $this->db->insert("page_data", $data);
     }
+    
     function delPageData($pid, $uid){
-      
+      $this->db->delete("page_data", array('pid' => $id, 'uid' => $uid));
     }
     
     function getPageDataById($pid, $uid){
@@ -168,7 +174,7 @@ class Dbmodel extends CI_Model {
         //array_push( $result, array('pid' => $row['pid'], 'uid' => $row['uid'], 'url' => $row['url'], 'code' => $row['code'], 'runtime' => $row['runtime'],
         //'htmlvalidity' => $row['htmlvalidity'], 'htmldoctype' => $row['htmldoctype'], 'htmlerrornum' => $row['htmlerrornum'], 'htmlwarningnum' => $row['htmlwarningnum'],
         //'cssvalidity' => $row['cssvalidity'], 'cssdoctype' => $row['cssdoctype'], 'csserrornum' => $row['csserrornum'], 'csswarningnum' => $row['csswarningnum'] ));
-        array_push( $result, $row);
+        array_push($result, $row);
       }
       return $result;
     }
