@@ -7,10 +7,10 @@ class Bg extends CI_Controller {
     if(empty($token)){
       echo "Empty transaction token!";
     }else{
-    //TODO: Tranzakció kezelés...
-    //Minta kód, a bejövõ json-hoz:
+    //TODO: TranzakciÃ³ kezelÃ©s...
+    //Minta kÃ³d, a bejÃ¶vÅ‘ json-hoz:
     /*
-    $json = json_decode(stripslashes($_POST["json-data"])); //kell, különben a \-ek miatt nem érti!
+    $json = json_decode(stripslashes($_POST["json-data"])); //kell, kÃ¼lÃ¶nben a \-ek miatt nem Ã©rti!
     var_dump($json);
 
     echo "Decoded: ".stripslashes($_POST["json-data"]);
@@ -43,14 +43,43 @@ class Bg extends CI_Controller {
         }
       }
       
-      //ebbe is kerülhetne a kész jelzés, de akkor az ütemezõ bekavarhat talán...
+      //ebbe is kerÃ¼lhetne a kÃ©sz jelzÃ©s, de akkor az Ã¼temezÅ‘ bekavarhat talÃ¡n...
       $this->dbmodel->updateProcessResults($token, array( 'htmlvalidity' => $ishtmlvalid, 'cssvalidity' => $iscssvalid ));
       echo "Success";
-      /*
-      array('htmldoctype' => $json[0][1], 'htmlvalidity' => $json[0][2], 'htmlerrornum' => $json[0][3], 'htmlwarningnum' => $json[0][4],
-      'cssdoctype' => $json[0][5], 'cssvalidity' => $json[0][6], 'csserrornum' => $json[0][7], 'csswarningnum' => $json[0][8]));
-      echo "Success";
-      */
+      
+      
+      //E-mail generÃ¡lÃ¡s
+      if($pdata['sendMail']){
+        $this->load->library('email');
+        $this->email->from('noreply@sitevalidator.hu', 'Sitevalidator');
+        $this->email->to($this->dbmodel->getEmailByUid($pdata['uid']));
+        
+        $this->email->subject('Sitevalidator elemzÃ©s '.date("Y-m-d H:i", time()));
+        
+        $msg = 'Ezt az Ã¼zenetet a rendszer automatikusan generÃ¡lta, ne vÃ¡laszoljon rÃ¡!
+A validÃ¡lÃ¡s lefutott: '.date("Y-m-d H:i", time()).'
+Ã–sszesÃ­tett eredmÃ©ny:
+HTML: '.$ishtmlvalid==0?'Invalid':'Valid'.'
+CSS: '.$iscssvalid==0?'Invalid':'Valid'.'
+
+RÃ©szletek:
+';
+        foreach($json as $row){
+$msg .= 'URL: '.$row->url.'
+HTML: '.$row->htmlvalidity.'
+HTML Doctype: '.$row->htmldoctype.'
+CSS: '.$row->htmlvalidity.'
+CSS Doctype: '.$row->cssdoctype.'
+
+';
+        }
+        
+        $this->email->message($msg);
+        
+        $this->email->send();
+        echo $this->email->print_debugger();
+      }
+      
     }
   }
 

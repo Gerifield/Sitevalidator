@@ -99,6 +99,12 @@ class Dbmodel extends CI_Model {
       $ret = $q->row_array();
       return $ret["user"];
     }
+    function getEmailByUid($uid){
+      $this->db->where("id", $uid);
+      $q = $this->db->get("users");
+      $ret = $q->row_array();
+      return $ret["email"];
+    }
     
     function getShortProcessDataByUid($uid){
       $this->db->order_by("id", "asc"); 
