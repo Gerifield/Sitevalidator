@@ -16,6 +16,7 @@ else:
 <input type="hidden" name="sendform" value="true" />
 <input type="submit" value="Módosítás" /></div>
 </form>
+<div style="text-align: center; padding: 10px 10px;"><a href="<?php echo site_url("main/delproc/".$datalist["id"]); ?>" style="text-decoration: none; font-size: 130%; font-weight: bold; color: red;" onclick="return confirm('Biztosan törölni szeretnéd ezt a bejegyzést?');">Törlés</a></div>
 <?php
 
 foreach($pages as $row):
@@ -44,10 +45,8 @@ foreach($pages as $row):
 
 <?php
 endforeach;
-
-echo $this->pagination->create_links();
 ?>
-<div style="text-align: center; padding-top: 10px;"><a href="<?php echo site_url("main/delproc/".$datalist["id"]); ?>" style="text-decoration: none; font-size: 130%; font-weight: bold; color: red;" onclick="return confirm('Biztosan törölni szeretnéd ezt a bejegyzést?');">Törlés</a></div>
+<div style="text-align: center; padding-top: 10px;"><?php echo $this->pagination->create_links(); ?></div>
 <?php
 endif;
 ?>
