@@ -178,4 +178,21 @@ class Dbmodel extends CI_Model {
       }
       return $result;
     }
+    function getPageDataByIdLimit($pid, $uid, $from, $num){
+      $this->db->where("pid", $pid);
+      $this->db->where("uid", $uid);
+      $this->db->limit($num, $from);
+      $q = $this->db->get("page_data");
+      $result = array(); // ha üres lenne a lekérés
+      foreach($q->result_array() as $row){
+        array_push($result, $row);
+      }
+      return $result;
+    }
+    function countPageDataById($pid, $uid){
+      $this->db->where("pid", $pid);
+      $this->db->where("uid", $uid);
+      $q = $this->db->get("page_data");
+      return $q->num_rows();
+    }
 }

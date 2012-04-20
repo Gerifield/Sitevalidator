@@ -44,6 +44,8 @@ foreach($pages as $row):
 
 <?php
 endforeach;
+
+echo $this->pagination->create_links();
 ?>
 <div style="text-align: center; padding-top: 10px;"><a href="<?php echo site_url("main/delproc/".$datalist["id"]); ?>" style="text-decoration: none; font-size: 130%; font-weight: bold; color: red;" onclick="return confirm('Biztosan törölni szeretnéd ezt a bejegyzést?');">Törlés</a></div>
 <?php

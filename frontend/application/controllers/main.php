@@ -178,7 +178,7 @@ class Main extends CI_Controller {
       $this->load->view('footer');
   }
   
-  public function details($id = false){
+  public function details($id = false, $page = 0){
     if($id && $this->session->userdata('logged_in')){
       $inurl = $this->input->post("inurl", TRUE);
       $data["inurl"] = $inurl;
@@ -212,9 +212,17 @@ class Main extends CI_Controller {
           $data["errormsg"] = "Ki kell tölteni az URL mezőt!";
         }
       }
+      
+      //oldalakra tördelés
+      $this->load->library('pagination');
+      $conf['base_url'] = site_url('main/details/'.$id);
+      $conf['total_rows'] = $this->dbmodel->countPageDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+      $conf['per_page'] = 5;
+      $conf['uri_segment'] = 4;
+      $this->pagination->initialize($conf);
 
       $data["datalist"] = $this->dbmodel->getProcessDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
-      $data["pages"] = $this->dbmodel->getPageDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+      $data["pages"] = $this->dbmodel->getPageDataByIdLimit($id, $this->dbmodel->getUidByUser($this->session->userdata('user')), $page, $conf['per_page']);
       
       $this->load->view('header');
       $this->load->view('menu');
