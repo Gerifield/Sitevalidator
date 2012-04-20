@@ -7,7 +7,9 @@ if(isset($successmsg)){
 }
 ?>
 <form method="post" action="">
-<p>URL*: <input type="text" name="inurl" value="<?php echo $inurl; ?>" size="70" /> Időpont: <input type="text" name="runtime" value="<?php echo $runtime; ?>" />
+<p>URL*: <input type="text" name="inurl" value="<?php echo $inurl; ?>" size="70" />
+Időpont: <input type="text" name="runtime" value="<?php echo $runtime; ?>" />
+Értesítés: <input type="checkbox" name="sendemail" <?php if($sendemail){ echo 'checked="checked"'; } ?> />
 <input type="hidden" name="sendform" value="true" /><input type="submit" value="Hozzáad" />
 <br /></p><div style="font-size:85%">*:Teljes url cím, http-vel és .htm, .html, .php vagy .asp végződéssel!</div>
 </form>
@@ -16,6 +18,7 @@ if(isset($successmsg)){
 <tr>
 <th>ID</th>
 <th>URL</th>
+<th>Értesítés</th>
 <th>Futtatás</th>
 <th>Állapot</th>
 <th>HTML Validitás</th>
@@ -28,11 +31,12 @@ if(isset($successmsg)){
 <tr class="clickable">
 <td><?php echo $row['id']; ?></td>
 <td><?php echo $row['url']; ?></td>
+<td><?php if(!$row['sendmail']){ echo "Nincs"; }else{ echo "Igen"; } ?></td>
 <td><?php echo date("Y-m-d H:i", $row['runtime']); ?></td>
 <td><?php if($row['state'] == 0){echo "Várakozik"; }elseif($row['state'] == 1){ echo "Futtatás..."; }elseif($row['state'] == 2){ echo "Kész"; } ?></td>
-<td><?php if($row["htmlvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
-<td><?php if($row["cssvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
-<td><?php if($row['starttime'] == 0){ echo "-"; }else{ echo date("Y-m-d H:i", $row['starttime']);} ?></td>
+<td><?php if(!$row["htmlvalidity"]){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
+<td><?php if(!$row["cssvalidity"]){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
+<td><?php if(!$row['starttime']){ echo "-"; }else{ echo date("Y-m-d H:i", $row['starttime']);} ?></td>
 </tr>
 <?php
   endforeach;

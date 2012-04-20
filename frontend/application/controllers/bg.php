@@ -49,7 +49,7 @@ class Bg extends CI_Controller {
       
       
       //E-mail generálás
-      if($pdata['sendMail']){
+      if($pdata['sendmail']){
         $this->load->library('email');
         $this->email->from('noreply@sitevalidator.hu', 'Sitevalidator');
         $this->email->to($this->dbmodel->getEmailByUid($pdata['uid']));

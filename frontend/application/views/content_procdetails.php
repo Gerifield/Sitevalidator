@@ -11,8 +11,9 @@ else:
   }
 ?>
 <form method="post" action="">
-<div><input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" />
-<input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" />
+<div>URL: <input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" />
+Időpont: <input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" />
+Értesítés: <input type="checkbox" name="sendemail" <?php if($datalist["sendmail"]){ echo 'checked="checked"'; } ?> />
 <input type="hidden" name="sendform" value="true" />
 <input type="submit" value="Módosítás" /></div>
 </form>
@@ -24,10 +25,10 @@ foreach($pages as $row):
 <table class="proc_table" style="width: 100%">
 
 <tr><td>URL:</td><td><?php echo $row["url"]; ?></td></tr>
-<tr><td>Futtatás ideje:</td><td><?php if($row["runtime"] == 0){ echo "-"; }else{ echo date("Y-m-d H:i", $row["runtime"]); }?></td></tr>
+<tr><td>Futtatás ideje:</td><td><?php if(!$row["runtime"]){ echo "-"; }else{ echo date("Y-m-d H:i", $row["runtime"]); }?></td></tr>
 <tr><td>HTTP válaszkód:</td><td><?php echo $row["code"]; ?></td></tr>
 
-<tr><td>HTML Validitás:</td><td><?php if($row["htmlvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td></tr>
+<tr><td>HTML Validitás:</td><td><?php if(!$row["htmlvalidity"]){ echo "Invalid"; }else{ echo "Valid"; }; ?></td></tr>
 <tr><td>HTML Doctype:</td><td><?php if(!empty($row["htmldoctype"])){ echo $row["htmldoctype"]; }else{ echo "Ismeretlen"; } ?></td></tr>
 <tr><td>HTML hibák:</td><td><?php echo $row["htmlerrornum"]; ?></td></tr>
 <tr><td>HTML figyelmeztetések:</td><td><?php echo $row["htmlwarningnum"]; ?></td></tr>

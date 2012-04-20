@@ -9,6 +9,7 @@ class Main extends CI_Controller {
       $inurl = $this->input->post("inurl", TRUE);
       $data["inurl"] = $inurl;
       $data["runtime"] = $this->input->post("runtime", TRUE);
+      $data["sendemail"] = $this->input->post("sendemail", TRUE) ? 1 : 0;
       if($this->input->post("sendform", TRUE)){
         if($inurl){
           //TODO kódolás
@@ -19,11 +20,12 @@ class Main extends CI_Controller {
             if(preg_match("/^http/", $inurl)){
               if(preg_match("/(htm|html|php|asp)$/", $inurl)){
                 
-                $this->dbmodel->addNewProcess($inurl, $stamp, $this->dbmodel->getUidByUser($this->session->userdata("user")));
+                $this->dbmodel->addNewProcess($inurl, $stamp, $data["sendemail"], $this->dbmodel->getUidByUser($this->session->userdata("user")));
                 $data["successmsg"] = "Sikeres hozzáadás!";
                 //kinullázzuk, már nem kell
                 $data["inurl"] = "";
                 $data["runtime"] = "";
+                $data["sendemail"] = 0;
                 
               }else{
                 $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
@@ -183,6 +185,7 @@ class Main extends CI_Controller {
       $inurl = $this->input->post("inurl", TRUE);
       $data["inurl"] = $inurl;
       $data["runtime"] = $this->input->post("runtime", TRUE);
+      $data["sendemail"] = $this->input->post("sendemail", TRUE) ? 1 : 0;
       if($this->input->post("sendform", TRUE)){
         if($inurl){
           //TODO kódolás
@@ -195,7 +198,7 @@ class Main extends CI_Controller {
               if(preg_match("/(htm|html|php|asp)$/", $inurl)){
                 
                 $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
-                array('url' => $inurl, 'runtime' => $stamp));
+                array('url' => $inurl, 'runtime' => $stamp, 'sendmail' => $data["sendemail"]));
                 $data["successmsg"] = "Sikeres frissítés!";
                 //$data["inurl"] = "";
                 //$data["runtime"] = "";
