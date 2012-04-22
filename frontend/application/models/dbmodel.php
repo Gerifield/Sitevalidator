@@ -130,8 +130,8 @@ class Dbmodel extends CI_Model {
       }
     }
     
-    function addNewProcess($url, $runtime, $sendmail, $uid){
-      $this->db->insert("processes", array('token' => sha1($uid.$url.rand()), 'url' => $url, 'runtime' => $runtime, 'uid' => $uid, 'sendmail' => $sendmail));
+    function addNewProcess($url, $runtime, $sendmail, $repeat, $uid){
+      $this->db->insert("processes", array('token' => sha1($uid.$url.rand()), 'url' => $url, 'runtime' => $runtime, 'uid' => $uid, 'sendmail' => $sendmail, 'repeat' => $repeat));
     }
     
     function updateProcess($id, $uid, $params){ //UID-vel is azonosít, csak sajátot írhat felül

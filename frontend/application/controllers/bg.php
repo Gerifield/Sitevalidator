@@ -44,7 +44,12 @@ class Bg extends CI_Controller {
       }
       
       //ebbe is kerülhetne a kész jelzés, de akkor az ütemező bekavarhat talán...
-      $this->dbmodel->updateProcessResults($token, array( 'htmlvalidity' => $ishtmlvalid, 'cssvalidity' => $iscssvalid ));
+      if($pdata['repeat'] > 0){
+        $newruntime = $pdata['runtime'] + $pdata['repeat'];
+      }else{
+        $newruntime = $pdata['runtime']
+      }
+      $this->dbmodel->updateProcessResults($token, array( 'htmlvalidity' => $ishtmlvalid, 'cssvalidity' => $iscssvalid, 'runtime' => $newruntime ));
       echo "Success";
       
       

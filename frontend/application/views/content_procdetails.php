@@ -13,7 +13,8 @@ else:
 <form method="post" action="">
 <div>URL: <input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" />
 Időpont: <input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" />
-Értesítés: <input type="checkbox" name="sendemail" <?php if($datalist["sendmail"]){ echo 'checked="checked"'; } ?> />
+Értesítés: <input type="checkbox" name="sendemail" <?php if($datalist["sendmail"]){ echo 'checked="checked"'; } ?> /><br />
+Ismétlés: <input type="text" name="repeat" value="<?php echo $datalist['repeat']/86400; ?>" size="3" /> naponta.<br />
 <input type="hidden" name="sendform" value="true" />
 <input type="submit" value="Módosítás" /></div>
 </form>

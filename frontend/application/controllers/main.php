@@ -10,6 +10,7 @@ class Main extends CI_Controller {
       $data["inurl"] = $inurl;
       $data["runtime"] = $this->input->post("runtime", TRUE);
       $data["sendemail"] = $this->input->post("sendemail", TRUE) ? 1 : 0;
+      $data["repeat"] = $this->input->post("repeat", TRUE);
       if($this->input->post("sendform", TRUE)){
         if($inurl){
           //TODO kódolás
@@ -20,12 +21,19 @@ class Main extends CI_Controller {
             if(preg_match("/^http/", $inurl)){
               if(preg_match("/(htm|html|php|asp)$/", $inurl)){
                 
-                $this->dbmodel->addNewProcess($inurl, $stamp, $data["sendemail"], $this->dbmodel->getUidByUser($this->session->userdata("user")));
+                if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
+                  $data["repeat"] = 0;
+                }else{
+                  $data["repeat"] = $data["repeat"] * 86400; //24 * 60 * 60 = 86400 másodpercre váltjuk
+                }
+                
+                $this->dbmodel->addNewProcess($inurl, $stamp, $data["sendemail"], $data["repeat"],  $this->dbmodel->getUidByUser($this->session->userdata("user")));
                 $data["successmsg"] = "Sikeres hozzáadás!";
                 //kinullázzuk, már nem kell
                 $data["inurl"] = "";
                 $data["runtime"] = "";
                 $data["sendemail"] = 0;
+                $data["repeat"] = "";
                 
               }else{
                 $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
@@ -186,6 +194,7 @@ class Main extends CI_Controller {
       $data["inurl"] = $inurl;
       $data["runtime"] = $this->input->post("runtime", TRUE);
       $data["sendemail"] = $this->input->post("sendemail", TRUE) ? 1 : 0;
+      $data["repeat"] = $this->input->post("repeat", TRUE);
       if($this->input->post("sendform", TRUE)){
         if($inurl){
           //TODO kódolás
@@ -196,10 +205,22 @@ class Main extends CI_Controller {
             
             if(preg_match("/^http/", $inurl)){
               if(preg_match("/(htm|html|php|asp)$/", $inurl)){
-                
-                $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
-                array('url' => $inurl, 'runtime' => $stamp, 'sendmail' => $data["sendemail"]));
+
+                if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
+                  $data["repeat"] = 0;
+                }else{
+                  $data["repeat"] = $data["repeat"] * 86400; //24 * 60 * 60 = 86400 másodpercre váltjuk
+                }
+                if($stamp > (time() - 60) ){
+                  //hogyha az új beállított idő több, mint az aktuális -1 perc -> új futtatás kell majd -> frissítjük az állapotot!
+                  $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
+                  array('url' => $inurl, 'state' => 0, 'runtime' => $stamp, 'sendmail' => $data["sendemail"], 'repeat' => $data["repeat"]));
+                }else{
+                  $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
+                  array('url' => $inurl, 'runtime' => $stamp, 'sendmail' => $data["sendemail"], 'repeat' => $data["repeat"]));
+                }
                 $data["successmsg"] = "Sikeres frissítés!";
+                
                 //$data["inurl"] = "";
                 //$data["runtime"] = "";
               }else{
