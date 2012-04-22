@@ -211,13 +211,25 @@ class Main extends CI_Controller {
                 }else{
                   $data["repeat"] = $data["repeat"] * 86400; //24 * 60 * 60 = 86400 másodpercre váltjuk
                 }
-                if($stamp > (time() - 60) ){
-                  //hogyha az új beállított idő több, mint az aktuális -1 perc -> új futtatás kell majd -> frissítjük az állapotot!
+                
+                $olddata = $this->dbmodel->getProcessDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
+                
+                //ha megváltozott az időpont vagy az ismétlődés, akkor további ellenőrzések!
+                if($stamp  != $olddata['runtime'] || $data["repeat"] != $olddata['repeat']){
+                  
+                  if($data["repeat"] == 0 && $olddata['runonce'] == 1){
+                    //ha nulla lesz az ismétlődés és már egyszer lefutott -> kész
+                    $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
+                    array('url' => $inurl, 'state' => 2, 'runtime' => $stamp, 'sendmail' => $data["sendemail"], 'repeat' => $data["repeat"]));
+                  
+                  }
+                  
                   $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
                   array('url' => $inurl, 'state' => 0, 'runtime' => $stamp, 'sendmail' => $data["sendemail"], 'repeat' => $data["repeat"]));
+
                 }else{
                   $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
-                  array('url' => $inurl, 'runtime' => $stamp, 'sendmail' => $data["sendemail"], 'repeat' => $data["repeat"]));
+                  array('url' => $inurl, 'sendmail' => $data["sendemail"]));
                 }
                 $data["successmsg"] = "Sikeres frissítés!";
                 
