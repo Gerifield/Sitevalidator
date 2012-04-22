@@ -257,7 +257,7 @@ class Main extends CI_Controller {
       $this->load->library('pagination');
       $conf['base_url'] = site_url('main/details/'.$id);
       $conf['total_rows'] = $this->dbmodel->countPageDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
-      $conf['per_page'] = 2;
+      $conf['per_page'] = 4; //oldalanként hányat mutat
       $conf['uri_segment'] = 4;
       $this->pagination->initialize($conf);
 

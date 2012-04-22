@@ -23,28 +23,51 @@ Ismétlés: <input type="text" name="repeat" value="<?php echo $datalist['repeat
 
 foreach($pages as $row):
 ?>
-<table class="proc_table" style="width: 100%">
+<table class="details_table" style="width: 100%">
 
-<tr><td>URL:</td><td><?php echo $row["url"]; ?></td></tr>
-<tr><td>Futtatás ideje:</td><td><?php if(!$row["runtime"]){ echo "-"; }else{ echo date("Y-m-d H:i", $row["runtime"]); }?></td></tr>
-<tr><td>HTTP válaszkód:</td><td><?php echo $row["code"]; ?></td></tr>
+<tr><td>URL:</td>
+<td><?php if($row["code"] == 200) { echo '<a href="'.$row["url"].'" class="ok_link">'.$row["url"].'</a>'; }else{ echo '<div style="color: red">'.$row["url"].' ('.$row["code"].')</div>'; } ?></td>
+<td>Futtatás ideje:</td><td><?php if(!$row["runtime"]){ echo "-"; }else{ echo date("Y-m-d H:i", $row["runtime"]); }?></td></tr>
 
-<tr><td>HTML Validitás:</td><td><?php if(!$row["htmlvalidity"]){ echo "Invalid"; }else{ echo "Valid"; }; ?></td></tr>
-<tr><td>HTML Doctype:</td><td><?php if(!empty($row["htmldoctype"])){ echo $row["htmldoctype"]; }else{ echo "Ismeretlen"; } ?></td></tr>
-<tr><td>HTML hibák:</td><td><?php echo $row["htmlerrornum"]; ?></td></tr>
-<tr><td>HTML figyelmeztetések:</td><td><?php echo $row["htmlwarningnum"]; ?></td></tr>
+<tr><td>HTML Validitás:</td><td><?php if(!$row["htmlvalidity"]){ echo "<div style='color: red;'>Invalid</div>"; }else{ echo "<div style='color: green;'>Valid</div>"; }; ?></td>
+<td>HTML Doctype:</td><td><?php
+if(!empty($row["htmldoctype"])){
+  if($row["htmlvalidity"] == 0){
+    echo "<div style='color: red;'>".$row["htmldoctype"]."</div>";
+  }else{
+    echo "<div style='color: green;'>".$row["htmldoctype"]."</div>";
+  }
+}else{
+  echo "Ismeretlen";
+}
+?></td></tr>
 
-<tr><td>CSS Validitás:</td><td><?php if($row["cssvalidity"] == 0){ echo "Invalid"; }else{ echo "Valid"; }; ?></td></tr>
-<tr><td>CSS Doctype:</td><td><?php if(!empty($row["cssdoctype"])){ echo $row["cssdoctype"]; }else{ echo "Ismeretlen"; } ?></td></tr>
-<tr><td>CSS hibák:</td><td><?php echo $row["csserrornum"]; ?></td></tr>
-<tr><td>CSS figyelmeztetések:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+<tr><td>HTML hibák:</td><td><?php echo $row["htmlerrornum"]; ?></td>
+<td>HTML figyelmeztetések:</td><td><?php echo $row["htmlwarningnum"]; ?></td></tr>
 
-<tr><td>HTML méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
-<tr><td>CSS méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
-<tr><td>Javascript méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
-<tr><td>Képek száma:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+<tr><td>CSS Validitás:</td><td><?php if($row["cssvalidity"] == 0){ echo "<div style='color: red;'>Invalid</div>"; }else{ echo "<div style='color: green;'>Valid</div>"; }; ?></td>
+<td>CSS Doctype:</td><td><?php
+if(!empty($row["cssdoctype"])){
+  if($row["cssvalidity"] == 0){
+    echo "<div style='color: red;'>".$row["cssdoctype"]."</div>";
+  }else{
+    echo "<div style='color: green;'>".$row["cssdoctype"]."</div>";
+  }
+}else{
+  echo "Ismeretlen";
+}
+?></td></tr>
+
+<tr><td>CSS hibák:</td><td><?php echo $row["csserrornum"]; ?></td>
+<td>CSS figyelmeztetések:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+
+<tr><td>HTML méret:</td><td><?php echo $row["csswarningnum"]; ?></td>
+<td>CSS méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+
+<tr><td>Javascript méret:</td><td><?php echo $row["csswarningnum"]; ?></td>
+<td>Képek száma:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
 </table>
-
+<br />
 <?php
 endforeach;
 ?>
