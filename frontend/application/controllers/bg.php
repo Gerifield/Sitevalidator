@@ -47,9 +47,9 @@ class Bg extends CI_Controller {
       if($pdata['repeat'] > 0){
         //ha van ismétlés, akkor frissíti a futás idejét és újra várakozóra teszi
         $newruntime = $pdata['runtime'] + $pdata['repeat'];
-        $this->dbmodel->updateProcessResults($token, array( 'htmlvalidity' => $ishtmlvalid, 'cssvalidity' => $iscssvalid, 'runtime' => $newruntime, 'state' => 0, 'runonce' => 1 ));
+        $this->dbmodel->updateProcessResults($token, array( 'htmlvalidity' => $ishtmlvalid, 'cssvalidity' => $iscssvalid, 'runtime' => $newruntime, 'state' => 0));
       }else{
-        $this->dbmodel->updateProcessResults($token, array( 'htmlvalidity' => $ishtmlvalid, 'cssvalidity' => $iscssvalid, 'runonce' => 1));
+        $this->dbmodel->updateProcessResults($token, array( 'htmlvalidity' => $ishtmlvalid, 'cssvalidity' => $iscssvalid));
       }
       echo "Success";
       

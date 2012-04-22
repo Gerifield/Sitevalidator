@@ -199,7 +199,9 @@ class Main extends CI_Controller {
         if($inurl){
           //TODO kódolás
           $stamp = strtotime($this->input->post("runtime", TRUE));
-          if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
+          if($stamp && $stamp != -1 && $stamp > time()-60){
+            //regen -1 volt 5.1.0 elott + ellenorizzuk, hogy nagyobb legyen az aktualis datumnal, kis ráhagyással (1 perc)
+            
             //print "OK";
             //print $stamp." -> ".date("Y-m-d H:i", $stamp);
             
@@ -214,24 +216,26 @@ class Main extends CI_Controller {
                 
                 $olddata = $this->dbmodel->getProcessDataById($id, $this->dbmodel->getUidByUser($this->session->userdata('user')));
                 
-                //ha megváltozott az időpont vagy az ismétlődés, akkor további ellenőrzések!
-                if($stamp  != $olddata['runtime'] || $data["repeat"] != $olddata['repeat']){
-                  
-                  if($data["repeat"] == 0 && $olddata['runonce'] == 1){
-                    //ha nulla lesz az ismétlődés és már egyszer lefutott -> kész
-                    $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
-                    array('url' => $inurl, 'state' => 2, 'runtime' => $stamp, 'sendmail' => $data["sendemail"], 'repeat' => $data["repeat"]));
-                  
-                  }
-                  
+                
+                if($stamp  != $olddata['runtime'] || $data["repeat"] != $olddata['repeat']){ 
+                  //ha megváltozott az időpont vagy az ismétlődés
                   $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
                   array('url' => $inurl, 'state' => 0, 'runtime' => $stamp, 'sendmail' => $data["sendemail"], 'repeat' => $data["repeat"]));
-
+                  $data["successmsg"] = "Sikeres időpont frissítés!";
+                  /**
+                    Az időpontban benne van már az ismétlés ideje!
+                    Ha változtatják, lekük rajta, akkor az új időpont lesz a lényeges, itt úgyis csak frissebbet lehet betenni -> Várakozik állapot kell.
+                    
+                    Ha az ütemezés változik -> akkor szintén állapot frissítés kell, de a dátum is nagyobb kell legyen -> nincs gond!
+                    VAGYIS: Az új futtatási időpont MINIDG nagyobb kell legyen, mint az aktuális időpont -> sok ellenőrzést meg lehet spróolni
+                  */
+                  
+                  
                 }else{
                   $this->dbmodel->updateProcess($id, $this->dbmodel->getUidByUser($this->session->userdata('user')),
                   array('url' => $inurl, 'sendmail' => $data["sendemail"]));
+                  $data["successmsg"] = "Sikeres frissítés!";
                 }
-                $data["successmsg"] = "Sikeres frissítés!";
                 
                 //$data["inurl"] = "";
                 //$data["runtime"] = "";
@@ -242,7 +246,7 @@ class Main extends CI_Controller {
               $data["errormsg"] = "Az URL-nek http://-el kell kezdődnie!.";
             }
           }else{
-            $data["errormsg"] = "Rossz dátum formázás.";
+            $data["errormsg"] = "Rossz dátum formázás vagy érvénytelen időpont.";
           }
         }else{
           $data["errormsg"] = "Ki kell tölteni az URL mezőt!";
