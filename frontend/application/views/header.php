@@ -28,4 +28,5 @@
         </script>
     </head>
     <body>
+      <div style="text-align:center;"><img src="<?php echo base_url("images/page_logo.png"); ?>" alt="Page logo" /></div>
         <div class="main_page">

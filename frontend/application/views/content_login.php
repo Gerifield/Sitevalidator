@@ -1,4 +1,4 @@
-      <div class="content" style="margin-top: 100px;">
+      <div class="content" style="margin-top: 20px;">
         <?php
         if(isset($errormsg)){
           echo '<div class="errormsg">'.$errormsg.'</div>';

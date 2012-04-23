@@ -29,7 +29,7 @@ foreach($pages as $row):
 <td><?php if($row["code"] == 200) { echo '<a href="'.$row["url"].'" class="ok_link">'.$row["url"].'</a>'; }else{ echo '<div style="color: red">'.$row["url"].' ('.$row["code"].')</div>'; } ?></td>
 <td>Futtatás ideje:</td><td><?php if(!$row["runtime"]){ echo "-"; }else{ echo date("Y-m-d H:i", $row["runtime"]); }?></td></tr>
 
-<tr><td>HTML Validitás:</td><td><?php if(!$row["htmlvalidity"]){ echo "<div style='color: red;'>Invalid</div>"; }else{ echo "<div style='color: green;'>Valid</div>"; }; ?></td>
+<tr><td>HTML Validitás:</td><td><?php if(!$row["htmlvalidity"]){ echo '<img src="'.base_url("images/error.png").'" alt="Error" />'; }else{ echo '<img src="'.base_url("images/ok.png").'" alt="Valid" />'; }; ?></td>
 <td>HTML Doctype:</td><td><?php
 if(!empty($row["htmldoctype"])){
   if($row["htmlvalidity"] == 0){
@@ -45,7 +45,7 @@ if(!empty($row["htmldoctype"])){
 <tr><td>HTML hibák:</td><td><?php echo $row["htmlerrornum"]; ?></td>
 <td>HTML figyelmeztetések:</td><td><?php echo $row["htmlwarningnum"]; ?></td></tr>
 
-<tr><td>CSS Validitás:</td><td><?php if($row["cssvalidity"] == 0){ echo "<div style='color: red;'>Invalid</div>"; }else{ echo "<div style='color: green;'>Valid</div>"; }; ?></td>
+<tr><td>CSS Validitás:</td><td><?php if($row["cssvalidity"] == 0){ echo '<img src="'.base_url("images/error.png").'" alt="Error" />'; }else{ echo '<img src="'.base_url("images/ok.png").'" alt="Valid" />'; }; ?></td>
 <td>CSS Doctype:</td><td><?php
 if(!empty($row["cssdoctype"])){
   if($row["cssvalidity"] == 0){
@@ -61,11 +61,11 @@ if(!empty($row["cssdoctype"])){
 <tr><td>CSS hibák:</td><td><?php echo $row["csserrornum"]; ?></td>
 <td>CSS figyelmeztetések:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
 
-<tr><td>HTML méret:</td><td><?php echo $row["csswarningnum"]; ?></td>
-<td>CSS méret:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+<tr><td>HTML méret:</td><td><?php echo round($row["htmlsize"]/1000 ,2); ?> KB</td>
+<td>CSS méret:</td><td><?php echo round($row["fullcsssize"]/1000 ,2); ?> KB</td></tr>
 
-<tr><td>Javascript méret:</td><td><?php echo $row["csswarningnum"]; ?></td>
-<td>Képek száma:</td><td><?php echo $row["csswarningnum"]; ?></td></tr>
+<tr><td>Javascript méret:</td><td><?php echo round($row["fulljssize"]/1000 ,2); ?> KB</td>
+<td>Képek száma:</td><td><?php echo $row["imgnum"]; ?> db</td></tr>
 </table>
 <br />
 <?php
