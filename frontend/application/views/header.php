@@ -28,5 +28,5 @@
         </script>
     </head>
     <body>
-      <div style="text-align:center; padding-bottom: 25px;"><img src="<?php echo base_url("images/page_logo.jpg"); ?>" alt="Page logo" /></div>
+      <div style="text-align:center; padding-bottom: 35px; padding-top: 20px;"><img src="<?php echo base_url("images/page_logo.png"); ?>" alt="Page logo" /></div>
         <div class="main_page">
