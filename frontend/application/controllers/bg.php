@@ -77,6 +77,7 @@ HTML Doctype: '.$row->htmldoctype.'
 CSS: '.$row->htmlvalidity.'
 CSS Doctype: '.$row->cssdoctype.'
 
+A részletes eredmények itt érhetőek el: '.site_url('main/details/'.$row->id).'
 ';
         }
         

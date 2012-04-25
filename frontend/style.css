@@ -106,6 +106,7 @@ font-size: 100%;
 
 
 .details_table{
+  font-family: "Arial";
   border-collapse: collapse;
   border: 1px #FFAD00 solid;
 }
