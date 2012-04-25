@@ -36,8 +36,8 @@ Ismétlés: <input type="text" name="repeat" value="<?php echo $repeat; ?>" size
 <td><?php if(!$row['sendmail']){ echo "Nincs"; }else{ echo "Igen"; } ?></td>
 <td><?php echo date("Y-m-d H:i", $row['runtime']); ?></td>
 <td><?php if($row['state'] == 0){echo "Várakozik"; }elseif($row['state'] == 1){ echo "Futtatás..."; }elseif($row['state'] == 2){ echo "Kész"; } ?></td>
-<td><?php if(!$row["htmlvalidity"]){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
-<td><?php if(!$row["cssvalidity"]){ echo "Invalid"; }else{ echo "Valid"; }; ?></td>
+<td style="text-align: center;"><?php if(!$row["htmlvalidity"]){ echo '<img src="'.base_url("images/error.png").'" alt="Error" />'; }else{ echo '<img src="'.base_url("images/ok.png").'" alt="Valid" />'; };  ?></td>
+<td style="text-align: center;"><?php if($row["cssvalidity"] == 0){ echo '<img src="'.base_url("images/error.png").'" alt="Error" />'; }else{ echo '<img src="'.base_url("images/ok.png").'" alt="Valid" />'; }; ?></td>
 <td><?php if(!$row['starttime']){ echo "-"; }else{ echo date("Y-m-d H:i", $row['starttime']);} ?></td>
 <td><?php if($row['repeat']){ echo "Igen"; }else{ echo "Nem"; } ?></td>
 </tr>
