@@ -1,6 +1,6 @@
 import urllib2
 import re
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import urlparse
 
 class PageParser:
@@ -93,7 +93,7 @@ class PageParser:
         html = resp.read()
         #print "          U: "+u
         self.latesturl = u #eltaroljuk, hogy az almappakra is jo legyen
-        soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
+        soup = BeautifulSoup(html)
         #print html
         
         

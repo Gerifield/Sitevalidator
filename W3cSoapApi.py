@@ -1,5 +1,5 @@
 import urllib2
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 class W3cSoapApi:
   headers = dict()
@@ -29,19 +29,19 @@ class W3cSoapApi:
 
   def getDoctype(self):
     try:
-      return self.soup.first('m:doctype').string
+      return self.soup.find('m:doctype').string
     except:
       return "Error"
 
   def getCharset(self):
     try:
-      return self.soup.first('m:charset').string
+      return self.soup.find('m:charset').string
     except:
       return "Error"
 
   def isValid(self):
     try:
-      if self.soup.first('m:validity').string == "true":
+      if self.soup.find('m:validity').string == "true":
         return True
       else:
         return False
@@ -50,12 +50,12 @@ class W3cSoapApi:
 
   def getErrorNum(self):
     try:
-      return self.soup.first('m:errorcount').string
+      return self.soup.find('m:errorcount').string
     except:
       return -1
   def getWarningNum(self):
     try:
-      return self.soup.first('m:warningcount').string
+      return self.soup.find('m:warningcount').string
     except:
       return -1
 
@@ -68,14 +68,14 @@ class W3cSoapApi:
 
   def getCSSDoctype(self):
     try:
-      return self.csssoup.first('m:csslevel').string
+      return self.csssoup.find('m:csslevel').string
     except:
       return "Error"
 
 
   def isValidCSS(self):
     try:
-      if self.csssoup.first('m:validity').string == "true":
+      if self.csssoup.find('m:validity').string == "true":
         return True
       else:
         return False
@@ -84,12 +84,12 @@ class W3cSoapApi:
 
   def getCSSErrorNum(self):
     try:
-      return self.csssoup.first('m:errorcount').string
+      return self.csssoup.find('m:errorcount').string
     except:
       return -1
   def getCSSWarningNum(self):
     try:
-      return self.csssoup.first('m:warningcount').string
+      return self.csssoup.find('m:warningcount').string
     except:
       return -1
 
@@ -104,7 +104,7 @@ class W3cSoapApi:
     self.resheads = ret.info()
     resdata = ret.read()
     
-    self.soup = BeautifulSoup(resdata, convertEntities=BeautifulSoup.HTML_ENTITIES)
+    self.soup = BeautifulSoup(resdata)
     
   def parseCSS(self):
     w3curl = "http://jigsaw.w3.org/css-validator/validator?uri="+self.url+"&output=soap12"
@@ -113,5 +113,5 @@ class W3cSoapApi:
     self.cssresheads = ret.info()
     resdata = ret.read()
     
-    self.csssoup = BeautifulSoup(resdata, convertEntities=BeautifulSoup.HTML_ENTITIES)
+    self.csssoup = BeautifulSoup(resdata)
     
