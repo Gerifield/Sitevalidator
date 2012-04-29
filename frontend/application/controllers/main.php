@@ -69,7 +69,7 @@ class Main extends CI_Controller {
         $this->session->set_userdata( array( "logged_in" => true, "user" => $user) );
         redirect("main/index");
       }else{
-        $data["errormsg"] = "Hibás felhasznűló név vagy jelszó!";
+        $data["errormsg"] = "Hibás felhasználó név vagy jelszó!";
       }
     }
     $data["user"] = $user; //atadjuk, kenyelmi okokbol....
@@ -199,7 +199,8 @@ class Main extends CI_Controller {
         if($inurl){
           //TODO kódolás
           $stamp = strtotime($this->input->post("runtime", TRUE));
-          if($stamp && $stamp != -1 && $stamp > time()-60){
+          if($stamp && $stamp > time()-60){
+          #if($stamp && $stamp != -1 && $stamp > time()-60){
             //regen -1 volt 5.1.0 elott + ellenorizzuk, hogy nagyobb legyen az aktualis datumnal, kis ráhagyással (1 perc)
             
             //print "OK";

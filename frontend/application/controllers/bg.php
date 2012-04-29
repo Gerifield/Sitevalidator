@@ -57,29 +57,31 @@ class Bg extends CI_Controller {
       //E-mail generálás
       if($pdata['sendmail']){
         $this->load->library('email');
-        $this->email->from('noreply@sitevalidator.hu', 'Sitevalidator');
+        $this->email->from('noreply@gerifield.hu', 'Sitevalidator');
         $this->email->to($this->dbmodel->getEmailByUid($pdata['uid']));
         
         $this->email->subject('Sitevalidator elemzés '.date("Y-m-d H:i", time()));
         
-        $msg = 'Ezt az üzenetet a rendszer automatikusan generálta, ne válaszoljon rá!
-A validálás lefutott: '.date("Y-m-d H:i", time()).'
+        $msg = "Ezt az üzenetet a rendszer automatikusan generálta, ne válaszoljon rá!
+A validálás lefutott: ".date("Y-m-d H:i", time())."
 Összesített eredmény:
-HTML: '.$ishtmlvalid==0?'Invalid':'Valid'.'
-CSS: '.$iscssvalid==0?'Invalid':'Valid'.'
+HTML: ".( $ishtmlvalid==0 ? "Invalid" : "Valid" )."
+CSS: ".( $iscssvalid==0 ? "Invalid" : "Valid" )."
 
 Részletek:
-';
+";
         foreach($json as $row){
-$msg .= 'URL: '.$row->url.'
-HTML: '.$row->htmlvalidity.'
-HTML Doctype: '.$row->htmldoctype.'
-CSS: '.$row->htmlvalidity.'
-CSS Doctype: '.$row->cssdoctype.'
+$msg = $msg . "URL: ".$row->url."
+HTML: ".$row->htmlvalidity."
+HTML Doctype: ".$row->htmldoctype."
+CSS: ".$row->htmlvalidity."
+CSS Doctype: ".$row->cssdoctype."
 
-A részletes eredmények itt érhetőek el: '.site_url('main/details/'.$row->id).'
-';
-        }
+";
+}
+
+$msg = $msg . "A részletes eredmények itt érhetőek el: ".site_url('main/details/'.$pdata['id'])."
+";
         
         $this->email->message($msg);
         

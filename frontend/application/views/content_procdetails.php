@@ -26,7 +26,14 @@ foreach($pages as $row):
 <table class="details_table" style="width: 100%">
 
 <tr><td>URL:</td>
-<td><?php if($row["code"] == 200) { echo '<a href="'.$row["url"].'" class="ok_link">'.$row["url"].'</a>'; }else{ echo '<div style="color: red">'.$row["url"].' ('.$row["code"].')</div>'; } ?></td>
+<td><?php if($row["code"] == 200) {
+  if($row['htmlvalidity']){
+    echo '<a href="'.$row["url"].'" class="ok_link">'.$row["url"].'</a>';
+  }else{
+    echo '<a href="http://validator.w3.org/check?uri='.$row["url"].'" style="color: red";>'.$row["url"].'</a>';
+}
+}else{ 
+echo '<div style="color: red">'.$row["url"].' ('.$row["code"].')</div>'; } ?></td>
 <td>Futtatás ideje:</td><td><?php if(!$row["runtime"]){ echo "-"; }else{ echo date("Y-m-d H:i", $row["runtime"]); }?></td></tr>
 
 <tr><td>HTML Validitás:</td><td><?php if(!$row["htmlvalidity"]){ echo '<img src="'.base_url("images/error.png").'" alt="Error" />'; }else{ echo '<img src="'.base_url("images/ok.png").'" alt="Valid" />'; }; ?></td>
