@@ -11,12 +11,13 @@ else:
   }
 ?>
 <form method="post" action="">
-<div>URL: <input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" />
-Időpont: <input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" />
-Értesítés: <input type="checkbox" name="sendemail" <?php if($datalist["sendmail"]){ echo 'checked="checked"'; } ?> /><br />
-Ismétlés: <input type="text" name="repeat" value="<?php echo $datalist['repeat']/86400; ?>" size="3" /> naponta.<br />
-<input type="hidden" name="sendform" value="true" />
-<input type="submit" value="Módosítás" /></div>
+<table>
+<tr><td>URL: <input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" /></td>
+<td>Időpont: <input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" />
+Értesítés: <input type="checkbox" name="sendemail" <?php if($datalist["sendmail"]){ echo 'checked="checked"'; } ?> /></td></tr>
+<tr><td>Ismétlés: <input type="text" name="repeat" value="<?php echo $datalist['repeat']/86400; ?>" size="3" /> naponta.</td>
+<td><input type="hidden" name="sendform" value="true" />
+<input type="submit" value="Módosítás" /></td></tr></table>
 </form>
 <div style="text-align: center; padding: 10px 10px;"><a href="<?php echo site_url("main/delproc/".$datalist["id"]); ?>" style="text-decoration: none; font-size: 130%; font-weight: bold; color: red;" onclick="return confirm('Biztosan törölni szeretnéd ezt a bejegyzést?');">Törlés</a></div>
 <?php
