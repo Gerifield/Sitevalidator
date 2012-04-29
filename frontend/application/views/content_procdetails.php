@@ -12,10 +12,10 @@ else:
 ?>
 <form method="post" action="">
 <table>
-<tr><td>URL: <input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" /></td>
+<tr><td>URL:</td><td><input type="text" name="inurl" value="<?php echo $datalist["url"]; ?>" size="70" /></td>
 <td>Időpont: <input type="text" name="runtime" value="<?php echo date("Y-m-d H:i", $datalist["runtime"]); ?>" />
 Értesítés: <input type="checkbox" name="sendemail" <?php if($datalist["sendmail"]){ echo 'checked="checked"'; } ?> /></td></tr>
-<tr><td>Ismétlés: <input type="text" name="repeat" value="<?php echo $datalist['repeat']/86400; ?>" size="3" /> naponta.</td>
+<tr><td>Ismétlés:</td><td><input type="text" name="repeat" value="<?php echo $datalist['repeat']/86400; ?>" size="3" /> naponta.</td>
 <td><input type="hidden" name="sendform" value="true" />
 <input type="submit" value="Módosítás" /></td></tr></table>
 </form>

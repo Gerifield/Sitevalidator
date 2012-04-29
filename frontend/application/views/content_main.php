@@ -8,10 +8,10 @@ if(isset($successmsg)){
 ?>
 <form method="post" action="">
 <table>
-<tr><td>URL*: <input type="text" name="inurl" value="<?php echo $inurl; ?>" size="70" /></td>
+<tr><td>URL*:</td><td><input type="text" name="inurl" value="<?php echo $inurl; ?>" size="70" /></td>
 <td>Időpont: <input type="text" name="runtime" value="<?php echo $runtime; ?>" />
 Értesítés: <input type="checkbox" name="sendemail" <?php if($sendemail){ echo 'checked="checked"'; } ?> /></td></tr>
-<tr><td>Ismétlés: <input type="text" name="repeat" value="<?php echo $repeat; ?>" size="3" /> naponta.</td>
+<tr><td>Ismétlés:</td><td><input type="text" name="repeat" value="<?php echo $repeat; ?>" size="3" /> naponta.</td>
 <td><input type="hidden" name="sendform" value="true" /><input type="submit" value="Hozzáad" /></td></tr>
 </table>
 <div style="font-size:85%">*:Teljes url cím, http-vel és .htm, .html, .php, .asp vagy .xml végződéssel!</div>
