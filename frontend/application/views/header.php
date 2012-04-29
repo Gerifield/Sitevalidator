@@ -21,7 +21,8 @@
               //$('input[name="runtime"]').watermark("ÉÉÉÉ.HH.NN ÓÓ:PP");
               $('input[name="runtime"]').datetimepicker({
                   minDate: new Date(<?php echo time()*1000; ?>),
-                  maxDate: 300, //max 300 nappal elore lehet beallitani
+                  //maxDate: 300, //max 300 nappal elore lehet beallitani
+                  maxDate: new Date(<?php echo time()*1000 + (300*24*60*60*1000) ?>),
                   dateFormat: "yy-mm-dd"
                   });
           });
