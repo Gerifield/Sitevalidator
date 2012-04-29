@@ -23,7 +23,11 @@ if($res = $mysqli->query("SELECT * FROM processes WHERE state = 0 AND runtime < 
     //TODO: futtatás megoldani
 //    exec('C:\\Python27\\python.exe validator.py  --callback '.$callback_url.'/'.$row['token'].' '.$row['url'].' > dump.txt &');
    //passthru('/usr/bin/python '.$file_path.' --format silent --callback '.$callback_url.'/'.$row['token'].' '.$row['url'].' &');
-   echo shell_exec('/usr/bin/python '.$file_path.' --format silent --callback '.$callback_url.'/'.$row['token'].' '.$row['url'].' > /dev/null & echo "'.$row['id'].' started"');
+   if(substr($row['url'], -4) == ".xml"){ //XML végzõdés
+    echo shell_exec('/usr/bin/python '.$file_path.' --format silent --xml --callback '.$callback_url.'/'.$row['token'].' '.$row['url'].' > /dev/null & echo "'.$row['id'].' started"');
+   }else{
+    echo shell_exec('/usr/bin/python '.$file_path.' --format silent --callback '.$callback_url.'/'.$row['token'].' '.$row['url'].' > /dev/null & echo "'.$row['id'].' started"');
+   }
   //echo $file_path. " -> ".$callback_url;
 //  echo '/usr/bin/python '.$file_path.' --format silent --callback '.$callback_url.'/'.$row['token'].' '.$row['url'].' ';  
   }

@@ -19,7 +19,7 @@ class Main extends CI_Controller {
           //print "OK";
           //print $stamp." -> ".date("Y-m-d H:i", $stamp);
             if(preg_match("/^http/", $inurl)){
-              if(preg_match("/(htm|html|php|asp)$/", $inurl)){
+              if(preg_match("/(htm|html|php|asp|xml)$/", $inurl)){
                 
                 if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
                   $data["repeat"] = 0;
@@ -36,7 +36,7 @@ class Main extends CI_Controller {
                 $data["repeat"] = "";
                 
               }else{
-                $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
+                $data["errormsg"] = "Az URL-nek .htm, .html, .php, .asp vagy .xml-re kell végződnie.";
               }
             }else{
               $data["errormsg"] = "Az URL-nek http-vel kell kezdődnie!.";
@@ -213,7 +213,7 @@ class Main extends CI_Controller {
             //print $stamp." -> ".date("Y-m-d H:i", $stamp);
             
             if(preg_match("/^http/", $inurl)){
-              if(preg_match("/(htm|html|php|asp)$/", $inurl)){
+              if(preg_match("/(htm|html|php|asp|xml)$/", $inurl)){
 
                 if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
                   $data["repeat"] = 0;
@@ -247,7 +247,7 @@ class Main extends CI_Controller {
                 //$data["inurl"] = "";
                 //$data["runtime"] = "";
               }else{
-                $data["errormsg"] = "Az URL-nek .htm, .html, .php vagy .asp-re kell végződnie.";
+                $data["errormsg"] = "Az URL-nek .htm, .html, .php, .asp vagy .xml-re kell végződnie.";
               }
             }else{
               $data["errormsg"] = "Az URL-nek http://-el kell kezdődnie!.";

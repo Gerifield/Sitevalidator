@@ -8,7 +8,7 @@ class PageParser:
   finurl = []
   baseurl = ""
   latesturl = ""
-  allowedEnds = [".php", ".htm", ".html", ".asp"] #Gond, ha nincs semmilyen vegzodes!
+  allowedEnds = [".php", ".htm", ".html", ".asp", ".xml"] #Gond, ha nincs semmilyen vegzodes!
   # /-t kivettem, azzal ovatosan!
   aloldal = 0
   error = False
@@ -77,7 +77,12 @@ class PageParser:
     self.allowedEnds.append(end) #.valami formaban
   
   def getLinks(self):
-    return self.finurl
+    #return self.finurl
+    ret = []
+    for c, u in self.finurl:
+      if not u.endswith('.xml'): #az xml vegu oldalt magat nem adja vissza
+        ret.append([c, u])
+    return ret
   
   def parsePage(self): # minden aloldalon vegigmegy
     if self.error:
@@ -99,7 +104,7 @@ class PageParser:
         
         #TODO: "Inline" CSS es Javascript kodokat lekezelni!
         if self.xmlFormat:
-          tags = soup.findAll('a') #ha xml-t kap, batran szedhet minden a tagot ki belole
+          tags = soup.findAll('loc') #ha xml-t kap, batran szedhet minden loc tagot ki belole
         else:
           tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
         #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet

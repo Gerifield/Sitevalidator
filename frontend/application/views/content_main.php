@@ -12,7 +12,7 @@ Időpont: <input type="text" name="runtime" value="<?php echo $runtime; ?>" />
 Értesítés: <input type="checkbox" name="sendemail" <?php if($sendemail){ echo 'checked="checked"'; } ?> /><br />
 Ismétlés: <input type="text" name="repeat" value="<?php echo $repeat; ?>" size="3" /> naponta.<br />
 <input type="hidden" name="sendform" value="true" /><input type="submit" value="Hozzáad" />
-<br /></p><div style="font-size:85%">*:Teljes url cím, http-vel és .htm, .html, .php vagy .asp végződéssel!</div>
+<br /></p><div style="font-size:85%">*:Teljes url cím, http-vel és .htm, .html, .php, .asp vagy .xml végződéssel!</div>
 </form>
 <br />
 <table class="proc_table">
