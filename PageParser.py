@@ -105,15 +105,20 @@ class PageParser:
         #TODO: "Inline" CSS es Javascript kodokat lekezelni!
         if self.xmlFormat:
           tags = soup.findAll('loc') #ha xml-t kap, batran szedhet minden loc tagot ki belole
+          for tag in tags:
+            #print tag.string
+            if self.checkEnding(tag.string):
+              #print "Good: "+tag['href']
+              self.addUrl(tag.string)
         else:
           tags = soup.findAll('a', attrs={'href': re.compile("^"+self.baseurl+"|^(?!http|javascript)")}) #csak a lokalis url-eket szedjuk ki
         #REGEX: sajat "baseurl" VAGY nem http/javascript kezdet
-        for tag in tags:
-          if tag.has_key('href'):
-            #print tag #URL feldolgozas
-            if self.checkEnding(tag['href']):
-              #print "Good: "+tag['href']
-              self.addUrl(tag['href'])
+          for tag in tags:
+            if tag.has_key('href'):
+              #print tag #URL feldolgozas
+              if self.checkEnding(tag['href']):
+                #print "Good: "+tag['href']
+                self.addUrl(tag['href'])
       except urllib2.URLError, e: #URL hibak kezelese
         if hasattr(e, 'reason'):
           #print 'Reason: ', e.reason
