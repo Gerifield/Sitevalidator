@@ -1,1 +1,0 @@
-A database.php-t a CodeIgniter csomagból lehet kivenni, megfelelõ kitöltés után ide be kell tenni!
