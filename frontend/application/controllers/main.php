@@ -20,7 +20,7 @@ class Main extends CI_Controller {
           //print "OK";
           //print $stamp." -> ".date("Y-m-d H:i", $stamp);
             if(preg_match("/^http/", $inurl)){
-              if(preg_match($ext_regex, $inurl)){
+              if(preg_match($this->ext_regex, $inurl)){
                 
                 if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
                   $data["repeat"] = 0;
@@ -214,7 +214,7 @@ class Main extends CI_Controller {
             //print $stamp." -> ".date("Y-m-d H:i", $stamp);
             
             if(preg_match("/^http/", $inurl)){
-              if(preg_match($ext_regex, $inurl)){
+              if(preg_match($this->ext_regex, $inurl)){
 
                 if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
                   $data["repeat"] = 0;
