@@ -2,7 +2,7 @@
 
 class Main extends CI_Controller {
 
-  $ext_regex = "/(htm|html|php|asp|xml)$/";
+  var $ext_regex = "/(htm|html|php|asp|xml)$/";
 
 	public function index()
 	{
