@@ -84,6 +84,7 @@ def main():
         print "CSS size:", cp.getAllCSSsize()/1000, "KB"
         print "Javascript size:", cp.getAllJSSize()/1000, "KB"
         print "Image number:", cp.getIMGNum()
+        print ""
       
       
       if args.callback: # ha van callback, akkor kiszedjuk az eredmenyeket egy tombbe
