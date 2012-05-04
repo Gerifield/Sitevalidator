@@ -10,7 +10,7 @@ class PageParser:
   latesturl = ""
   allowedEnds = [".php", ".htm", ".html", ".asp", ".xml"] #Gond, ha nincs semmilyen vegzodes!
   # /-t kivettem, azzal ovatosan!
-  aloldal = 0 # csak debug célra, az ismeretlen hivatkozások számozására
+  aloldal = 0 # csak debug celra, az ismeretlen hivatkozasok szamozasara
   error = False
   errormsg = ""
   xmlFormat = False
