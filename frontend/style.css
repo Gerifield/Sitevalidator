@@ -115,3 +115,12 @@ font-size: 100%;
   text-decoration: none;
   color: green;
 }
+
+.lapozo_link{
+text-align: center;
+padding-top: 10px;
+}
+
+.lapozo_link a{
+color: blue;
+}

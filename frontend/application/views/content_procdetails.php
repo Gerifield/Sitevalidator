@@ -79,7 +79,7 @@ if(!empty($row["cssdoctype"])){
 <?php
 endforeach;
 ?>
-<div style="text-align: center; padding-top: 10px;"><?php echo $this->pagination->create_links(); ?></div>
+<div class="lapozo_link"><?php echo $this->pagination->create_links(); ?></div>
 <?php
 endif;
 ?>
