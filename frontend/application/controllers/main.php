@@ -111,6 +111,7 @@ class Main extends CI_Controller {
         }else{
           if(!isset($data["errormsg"])){
             $data["errormsg"] = "Már folgalt ez az e-mail cím!";
+          }
         }
       }
       
