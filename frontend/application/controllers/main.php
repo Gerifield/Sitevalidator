@@ -107,11 +107,10 @@ class Main extends CI_Controller {
           $this->dbmodel->updateEmail($this->session->userdata("user"), $email);
           if(!isset($data["successmsg"])){ //ha nem módosult a jelszó, akkor írjuk ezt ki (vagyis mindig, amikor a formot elkuldik)
             $data["successmsg"] = "Sikeres e-mail módosítás!";
-          }else{
-            if(!isset($data["errormsg"])){
-              $data["errormsg"] = "Már folgalt ez az e-mail cím!";
-            }
           }
+        }else{
+          if(!isset($data["errormsg"])){
+            $data["errormsg"] = "Már folgalt ez az e-mail cím!";
         }
       }
       
