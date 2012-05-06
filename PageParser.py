@@ -19,7 +19,7 @@ class PageParser:
     self.xmlFormat = val
   
   def __init__(self, url):
-    if url.endswith("/") or not self.checkEnding(url):
+    if not self.checkEnding(url):
       self.errormsg = "Teljes URL-t kell megadni!"
       self.error = True
     else:
