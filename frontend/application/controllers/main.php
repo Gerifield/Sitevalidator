@@ -40,7 +40,7 @@ class Main extends CI_Controller {
                 $data["errormsg"] = "Az URL-nek .htm, .html, .php, .asp vagy .xml-re kell végződnie.";
               }
             }else{
-              $data["errormsg"] = "Az URL-nek http-vel kell kezdődnie!.";
+              $data["errormsg"] = "Az URL-nek http-vel vagy https-el kell kezdődnie!";
             }
           }else{
             $data["errormsg"] = "Rossz dátum formázás.";
@@ -251,7 +251,7 @@ class Main extends CI_Controller {
                 $data["errormsg"] = "Az URL-nek .htm, .html, .php, .asp vagy .xml-re kell végződnie.";
               }
             }else{
-              $data["errormsg"] = "Az URL-nek http://-el kell kezdődnie!.";
+              $data["errormsg"] = "Az URL-nek http-vel vagy https-el kell kezdődnie!";
             }
           }else{
             $data["errormsg"] = "Rossz dátum formázás vagy érvénytelen időpont.";
