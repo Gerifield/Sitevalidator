@@ -16,7 +16,7 @@ class Main extends CI_Controller {
         if($inurl){
           //TODO kódolás
           $stamp = strtotime($this->input->post("runtime", TRUE));
-          if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
+          if($stamp && $stamp > time()-60){ //regen -1 volt 5.1.0 elott
           //print "OK";
           //print $stamp." -> ".date("Y-m-d H:i", $stamp);
             if(preg_match("/^(http|https):\/\//", $inurl)){
