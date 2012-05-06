@@ -19,7 +19,7 @@ class Main extends CI_Controller {
           if($stamp && $stamp != -1){ //regen -1 volt 5.1.0 elott
           //print "OK";
           //print $stamp." -> ".date("Y-m-d H:i", $stamp);
-            if(preg_match("/^http/", $inurl)){
+            if(preg_match("/^(http|https):\/\//", $inurl)){
               if(preg_match($this->ext_regex, $inurl)){
                 
                 if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
@@ -213,7 +213,7 @@ class Main extends CI_Controller {
             //print "OK";
             //print $stamp." -> ".date("Y-m-d H:i", $stamp);
             
-            if(preg_match("/^http/", $inurl)){
+            if(preg_match("/^(http|https):\/\//", $inurl)){
               if(preg_match($this->ext_regex, $inurl)){
 
                 if(!is_numeric($data["repeat"])){ //ha hamis vagy nem szám, akkor nullázzuk
