@@ -70,7 +70,7 @@ class Main extends CI_Controller {
         $this->session->set_userdata( array( "logged_in" => true, "user" => $user) );
         redirect("main/index");
       }else{
-        $data["errormsg"] = "Hibás felhasználó név vagy jelszó!";
+        $data["errormsg"] = "Hibás felhasználónév vagy jelszó!";
       }
     }
     $data["user"] = $user; //atadjuk, kenyelmi okokbol....
@@ -178,7 +178,7 @@ class Main extends CI_Controller {
                 $data["errormsg"] = "Az e-mail cím már használatban van!";
               }
             }else{
-              $data["errormsg"] = "A felhasználó név már használatban van!";
+              $data["errormsg"] = "A felhasználónév már használatban van!";
             }
           }else{
             $data["errormsg"] = "A két jelszó nem egyezik!";
