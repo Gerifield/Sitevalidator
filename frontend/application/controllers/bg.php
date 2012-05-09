@@ -72,9 +72,9 @@ Részletek:
 ";
         foreach($json as $row){
 $msg = $msg . "URL: ".$row->url."
-HTML: ".$row->htmlvalidity."
+HTML: ".($row->htmlvalidity?"Valid":"Invalid")."
 HTML Doctype: ".$row->htmldoctype."
-CSS: ".$row->htmlvalidity."
+CSS: ".($row->htmlvalidity?"Valid":"Invalid")."
 CSS Doctype: ".$row->cssdoctype."
 
 ";
